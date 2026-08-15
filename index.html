@@ -328,6 +328,24 @@
 		.section-small {
 			padding: 65px 0;
 		}
+		.video-wrap {
+			position: relative;
+			width: min(1000px, 100%);
+			margin: 0 auto;
+			aspect-ratio: 16 / 9;
+			border-radius: 16px;
+			overflow: hidden;
+			border: 1px solid rgba(255, 255, 255, .1);
+			background: #0d1016;
+			box-shadow: 0 24px 70px rgba(0, 0, 0, .45);
+		}
+		.video-wrap iframe {
+			position: absolute;
+			inset: 0;
+			width: 100%;
+			height: 100%;
+			border: 0;
+		}
 
 		.section-head {
 			margin-bottom: 42px;
@@ -1306,6 +1324,39 @@
 					</div>
 				</div>
 
+			</div>
+		</section>
+
+		<section class="section-small" id="video">
+			<div class="container">
+				<div class="section-head">
+					<div class="section-label">Video</div>
+					<h2 class="section-title">视频演示</h2>
+					<p class="section-desc">
+						观看 B 站视频，了解 GBTGAME Launcher 的安装与使用方法。
+					</p>
+				</div>
+				<div class="video-wrap">
+					<iframe
+						src="https://player.bilibili.com/player.html?bvid=BV1mDgK6ZE5z&autoplay=0"
+						title="GBTGAME Launcher 视频演示"
+						allowfullscreen="allowfullscreen"
+						loading="lazy"
+						scrolling="no"
+						frameborder="0"
+						sandbox="allow-top-navigation allow-same-origin allow-forms allow-scripts allow-popups"
+						referrerpolicy="no-referrer"
+					></iframe>
+				</div>
+				<p style="text-align:center; margin-top:14px; color:#89919d; font-size:13px;">
+					原视频链接：
+					<a
+						href="https://www.bilibili.com/video/BV1mDgK6ZE5z"
+						target="_blank"
+						rel="noopener noreferrer"
+						style="color:#8692ff; font-weight:700;"
+					>https://www.bilibili.com/video/BV1mDgK6ZE5z</a>
+				</p>
 			</div>
 		</section>
 
