@@ -3,6 +3,11 @@ name: deploy-pages
 on:
   push:
     branches: [main]
+  # pushes made by the sync workflow use GITHUB_TOKEN, which does NOT
+  # trigger other workflows: re-deploy when the sync completes instead
+  workflow_run:
+    workflows: [sync-release]
+    types: [completed]
   workflow_dispatch: {}
 
 permissions:
