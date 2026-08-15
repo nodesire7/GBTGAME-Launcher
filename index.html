@@ -1,0 +1,2107 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<meta
+		name="description"
+		content="GBTGAME D加密虚拟化游戏启动器 v3.0.2 - 全新独立架构，单 EXE + WebView2，支持 KRK、DSE、VBS/F7 多链路启动。"
+	>
+
+	<meta name="theme-color" content="#090b10">
+
+	<link
+		rel="icon"
+		type="image/webp"
+		href="https://raw.githubusercontent.com/nodesire7/Gamepic/main/img/乐赏logo.webp"
+	>
+
+	<title>GBTGAME Launcher v3.0.2 - D加密虚拟化游戏启动器</title>
+
+	<style>
+		* {
+			box-sizing: border-box;
+			margin: 0;
+			padding: 0;
+		}
+
+		html {
+			scroll-behavior: smooth;
+		}
+
+		body {
+			font-family:
+				Inter,
+				"SF Pro Display",
+				"SF Pro Text",
+				"Segoe UI",
+				"Microsoft YaHei",
+				"PingFang SC",
+				sans-serif;
+
+			background:
+				radial-gradient(circle at 15% -10%, rgba(90, 110, 255, .15), transparent 34%),
+				radial-gradient(circle at 85% 5%, rgba(33, 210, 170, .08), transparent 30%),
+				#090b10;
+
+			color: #f3f5f7;
+			line-height: 1.75;
+			min-height: 100vh;
+		}
+
+		a {
+			color: inherit;
+			text-decoration: none;
+		}
+
+		button {
+			font: inherit;
+		}
+
+		img {
+			max-width: 100%;
+		}
+
+		.container {
+			width: min(1180px, calc(100% - 40px));
+			margin: 0 auto;
+		}
+
+		.nav {
+			position: sticky;
+			top: 0;
+			z-index: 100;
+			background: rgba(9, 11, 16, .76);
+			backdrop-filter: blur(20px);
+			-webkit-backdrop-filter: blur(20px);
+			border-bottom: 1px solid rgba(255, 255, 255, .06);
+		}
+
+		.nav-inner {
+			height: 68px;
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			gap: 24px;
+		}
+
+		.brand {
+			display: flex;
+			align-items: center;
+			gap: 11px;
+			font-weight: 800;
+			letter-spacing: -.4px;
+		}
+
+		.brand-logo {
+			width: 38px;
+			height: 38px;
+			display: block;
+			object-fit: contain;
+			border-radius: 10px;
+			box-shadow: 0 6px 24px rgba(0, 0, 0, .28);
+		}
+
+		.brand-text {
+			font-size: 16px;
+			white-space: nowrap;
+		}
+
+		.nav-links {
+			display: flex;
+			align-items: center;
+			gap: 20px;
+			font-size: 14px;
+			color: #9ca3af;
+		}
+
+		.nav-links a {
+			transition: color .2s ease;
+		}
+
+		.nav-links a:hover {
+			color: #ffffff;
+		}
+
+		.version-chip {
+			padding: 7px 12px;
+			border-radius: 999px;
+			background: rgba(255, 255, 255, .06);
+			border: 1px solid rgba(255, 255, 255, .08);
+			color: #e4e7eb;
+			font-size: 12px;
+			font-weight: 700;
+			white-space: nowrap;
+		}
+
+		.hero {
+			padding: 94px 0 72px;
+			text-align: center;
+		}
+
+		.hero-logo-wrap {
+			width: 92px;
+			height: 92px;
+			margin: 0 auto 25px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			position: relative;
+		}
+
+		.hero-logo-wrap::before {
+			content: "";
+			position: absolute;
+			width: 145px;
+			height: 145px;
+			border-radius: 50%;
+			background: radial-gradient(circle, rgba(112, 126, 255, .28), transparent 68%);
+			filter: blur(16px);
+			pointer-events: none;
+		}
+
+		.hero-logo {
+			position: relative;
+			width: 92px;
+			height: 92px;
+			object-fit: contain;
+			border-radius: 22px;
+			filter: drop-shadow(0 14px 30px rgba(0, 0, 0, .36));
+		}
+
+		.hero-badge {
+			display: inline-flex;
+			align-items: center;
+			gap: 8px;
+			padding: 7px 12px;
+			margin-bottom: 22px;
+			border-radius: 999px;
+			background: rgba(104, 120, 255, .08);
+			border: 1px solid rgba(126, 139, 255, .18);
+			color: #abb5ff;
+			font-size: 13px;
+			font-weight: 700;
+		}
+
+		.hero-badge::before {
+			content: "";
+			width: 7px;
+			height: 7px;
+			border-radius: 50%;
+			background: #7c8cff;
+			box-shadow: 0 0 0 5px rgba(124, 140, 255, .1);
+		}
+
+		.hero h1 {
+			max-width: 980px;
+			margin: 0 auto;
+			font-size: clamp(42px, 7vw, 78px);
+			line-height: 1.06;
+			letter-spacing: -3px;
+			font-weight: 900;
+		}
+
+		.gradient-text {
+			background: linear-gradient(100deg, #ffffff 10%, #a6afff 52%, #8ce9cd 100%);
+			-webkit-background-clip: text;
+			background-clip: text;
+			color: transparent;
+		}
+
+		.hero-desc {
+			max-width: 820px;
+			margin: 27px auto 0;
+			font-size: 18px;
+			color: #a0a7b2;
+		}
+
+		.hero-desc strong {
+			color: #f2f4f7;
+		}
+
+		.hero-actions {
+			margin-top: 34px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			gap: 12px;
+			flex-wrap: wrap;
+		}
+
+		.btn {
+			min-height: 46px;
+			padding: 0 20px;
+			display: inline-flex;
+			align-items: center;
+			justify-content: center;
+			gap: 8px;
+			border-radius: 11px;
+			font-size: 14px;
+			font-weight: 700;
+			transition: transform .2s ease, background .2s ease, border-color .2s ease;
+		}
+
+		.btn-primary {
+			background: #f5f6f8;
+			color: #0a0c11;
+		}
+
+		.btn-primary:hover {
+			transform: translateY(-2px);
+			background: #ffffff;
+		}
+
+		.btn-secondary {
+			background: rgba(255, 255, 255, .05);
+			border: 1px solid rgba(255, 255, 255, .1);
+			color: #e7e9ec;
+		}
+
+		.btn-secondary:hover {
+			transform: translateY(-2px);
+			background: rgba(255, 255, 255, .09);
+		}
+
+		.hero-meta {
+			margin-top: 30px;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			gap: 22px;
+			flex-wrap: wrap;
+			color: #737b87;
+			font-size: 12px;
+		}
+
+		.hero-meta span {
+			display: inline-flex;
+			align-items: center;
+			gap: 7px;
+		}
+
+		.hero-meta span::before {
+			content: "";
+			width: 5px;
+			height: 5px;
+			background: #47505d;
+			border-radius: 50%;
+		}
+
+		.main-preview {
+			position: relative;
+			margin-top: 46px;
+		}
+
+		.main-preview::before {
+			content: "";
+			position: absolute;
+			width: 75%;
+			height: 70%;
+			left: 50%;
+			top: 20%;
+			transform: translateX(-50%);
+			background: radial-gradient(ellipse, rgba(100, 115, 255, .25), transparent 68%);
+			filter: blur(70px);
+			pointer-events: none;
+		}
+
+		.preview-frame {
+			position: relative;
+			overflow: hidden;
+			border-radius: 20px;
+			border: 1px solid rgba(255, 255, 255, .11);
+			background: #0d1016;
+			box-shadow: 0 35px 100px rgba(0, 0, 0, .5), 0 0 0 1px rgba(255, 255, 255, .02);
+		}
+
+		.preview-frame img {
+			width: 100%;
+			display: block;
+			cursor: zoom-in;
+		}
+
+		.section {
+			padding: 90px 0;
+		}
+
+		.section-small {
+			padding: 65px 0;
+		}
+		.video-wrap {
+			position: relative;
+			width: min(1000px, 100%);
+			margin: 0 auto;
+			aspect-ratio: 16 / 9;
+			border-radius: 16px;
+			overflow: hidden;
+			border: 1px solid rgba(255, 255, 255, .1);
+			background: #0d1016;
+			box-shadow: 0 24px 70px rgba(0, 0, 0, .45);
+		}
+		.video-wrap iframe {
+			position: absolute;
+			inset: 0;
+			width: 100%;
+			height: 100%;
+			border: 0;
+		}
+
+		.section-head {
+			margin-bottom: 42px;
+		}
+
+		.section-label {
+			margin-bottom: 10px;
+			font-size: 12px;
+			font-weight: 800;
+			color: #8692ff;
+			letter-spacing: 1.7px;
+			text-transform: uppercase;
+		}
+
+		.section-title {
+			font-size: clamp(29px, 4vw, 43px);
+			line-height: 1.2;
+			font-weight: 850;
+			letter-spacing: -1.4px;
+		}
+
+		.section-desc {
+			max-width: 760px;
+			margin-top: 15px;
+			color: #89919d;
+			font-size: 16px;
+		}
+
+		.download-box {
+			position: relative;
+			overflow: hidden;
+			padding: 38px;
+			border-radius: 22px;
+			background: linear-gradient(135deg, rgba(91, 106, 255, .11), rgba(255, 255, 255, .025) 50%, rgba(60, 205, 170, .055));
+			border: 1px solid rgba(126, 139, 255, .16);
+		}
+
+		.download-box::before {
+			content: "";
+			position: absolute;
+			width: 380px;
+			height: 380px;
+			right: -180px;
+			top: -210px;
+			border-radius: 50%;
+			background: radial-gradient(circle, rgba(121, 135, 255, .14), transparent 70%);
+			pointer-events: none;
+		}
+
+		.download-header {
+			position: relative;
+			display: flex;
+			justify-content: space-between;
+			align-items: flex-start;
+			gap: 24px;
+			margin-bottom: 28px;
+		}
+
+		.download-version {
+			margin-top: 4px;
+			font-size: 34px;
+			font-weight: 900;
+			letter-spacing: -1.5px;
+		}
+
+		.download-latest {
+			display: inline-flex;
+			align-items: center;
+			gap: 7px;
+			padding: 7px 11px;
+			border-radius: 999px;
+			background: rgba(126, 139, 255, .1);
+			border: 1px solid rgba(126, 139, 255, .17);
+			color: #adb6ff;
+			font-size: 11px;
+			font-weight: 900;
+		}
+
+		.download-latest::before {
+			content: "";
+			width: 6px;
+			height: 6px;
+			border-radius: 50%;
+			background: #8b98ff;
+			box-shadow: 0 0 0 4px rgba(139, 152, 255, .1);
+		}
+
+		.download-list {
+			position: relative;
+			display: flex;
+			flex-direction: column;
+			gap: 12px;
+		}
+
+		.download-item {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			gap: 20px;
+			padding: 20px;
+			border-radius: 15px;
+			background: rgba(0, 0, 0, .18);
+			border: 1px solid rgba(255, 255, 255, .065);
+			transition: transform .2s ease, border-color .2s ease, background .2s ease;
+		}
+
+		.download-item:hover {
+			transform: translateY(-2px);
+			background: rgba(255, 255, 255, .045);
+			border-color: rgba(255, 255, 255, .12);
+		}
+
+		.download-item-main {
+			display: flex;
+			align-items: center;
+			gap: 16px;
+			min-width: 0;
+		}
+
+		.download-icon {
+			flex: 0 0 48px;
+			width: 48px;
+			height: 48px;
+			display: grid;
+			place-items: center;
+			border-radius: 13px;
+			background: rgba(124, 139, 255, .1);
+			border: 1px solid rgba(124, 139, 255, .14);
+			color: #b2baff;
+			font-size: 14px;
+			font-weight: 900;
+		}
+
+		.download-item.xunlei .download-icon {
+			background: rgba(58, 148, 255, .09);
+			border-color: rgba(58, 148, 255, .15);
+			color: #8cc5ff;
+		}
+
+		.download-item.baidu .download-icon {
+			background: rgba(72, 104, 255, .09);
+			border-color: rgba(72, 104, 255, .15);
+			color: #9cabff;
+		}
+		.download-item.github .download-icon {
+			background: rgba(255, 255, 255, .07);
+			border-color: rgba(255, 255, 255, .13);
+			color: #e6e9ee;
+		}
+
+		.release-page-link {
+			display: inline-flex;
+			align-items: center;
+			gap: 7px;
+			margin-top: 16px;
+			padding: 9px 13px;
+			border-radius: 10px;
+			background: rgba(255, 255, 255, .05);
+			border: 1px solid rgba(255, 255, 255, .08);
+			color: #dfe3e8;
+			font-size: 12px;
+			font-weight: 700;
+			transition: background .2s ease, transform .2s ease;
+		}
+
+		.release-page-link:hover {
+			background: rgba(255, 255, 255, .09);
+			transform: translateY(-1px);
+		}
+
+		.release-published {
+			margin-top: 6px;
+			color: #717a86;
+			font-size: 12px;
+		}
+
+		.release-assets {
+			margin-top: 18px;
+			padding-top: 16px;
+			border-top: 1px solid rgba(255, 255, 255, .06);
+			color: #7f8894;
+			font-size: 12px;
+			word-break: break-all;
+		}
+
+
+		.download-info h3 {
+			margin-bottom: 3px;
+			font-size: 16px;
+		}
+
+		.download-info p {
+			color: #777f8a;
+			font-size: 12px;
+		}
+
+		.download-action {
+			flex: 0 0 auto;
+			display: inline-flex;
+			align-items: center;
+			justify-content: center;
+			gap: 8px;
+			min-width: 100px;
+			height: 40px;
+			padding: 0 15px;
+			border-radius: 10px;
+			background: #f3f5f8;
+			color: #0c0e13;
+			font-size: 13px;
+			font-weight: 800;
+		}
+
+		.download-item:hover .download-action {
+			background: #ffffff;
+		}
+
+		.download-password {
+			position: relative;
+			margin-top: 16px;
+			padding: 15px 17px;
+			border-radius: 12px;
+			background: rgba(255, 255, 255, .025);
+			border: 1px solid rgba(255, 255, 255, .055);
+			color: #79818c;
+			font-size: 12px;
+		}
+
+		.download-password strong {
+			color: #cfd4da;
+		}
+
+		.architecture {
+			display: grid;
+			grid-template-columns: repeat(3, 1fr);
+			gap: 15px;
+		}
+
+		.arch-card {
+			position: relative;
+			overflow: hidden;
+			min-height: 230px;
+			padding: 26px;
+			border-radius: 17px;
+			background: linear-gradient(145deg, rgba(255, 255, 255, .055), rgba(255, 255, 255, .02));
+			border: 1px solid rgba(255, 255, 255, .075);
+		}
+
+		.arch-index {
+			margin-bottom: 25px;
+			font-size: 12px;
+			font-weight: 800;
+			color: #77808c;
+		}
+
+		.arch-title {
+			margin-bottom: 10px;
+			font-size: 21px;
+			font-weight: 800;
+		}
+
+		.arch-desc {
+			max-width: 250px;
+			color: #8f97a2;
+			font-size: 14px;
+		}
+
+		.arch-tag {
+			position: absolute;
+			right: 20px;
+			bottom: 18px;
+			color: rgba(255, 255, 255, .13);
+			font-size: 42px;
+			font-weight: 900;
+			letter-spacing: -2px;
+		}
+
+		.arch-arrow {
+			margin-top: 17px;
+			color: #5f6874;
+			font-size: 12px;
+		}
+
+		.feature-grid {
+			display: grid;
+			grid-template-columns: repeat(2, 1fr);
+			gap: 14px;
+		}
+
+		.feature {
+			padding: 23px;
+			display: flex;
+			align-items: flex-start;
+			gap: 17px;
+			border-radius: 15px;
+			background: rgba(255, 255, 255, .025);
+			border: 1px solid rgba(255, 255, 255, .065);
+		}
+
+		.feature-icon {
+			flex: 0 0 42px;
+			width: 42px;
+			height: 42px;
+			display: grid;
+			place-items: center;
+			border-radius: 11px;
+			background: rgba(124, 139, 255, .1);
+			border: 1px solid rgba(124, 139, 255, .14);
+			color: #aeb7ff;
+			font-size: 18px;
+		}
+
+		.feature h3 {
+			margin-bottom: 5px;
+			font-size: 16px;
+		}
+
+		.feature p {
+			font-size: 13px;
+			color: #868e99;
+		}
+
+		.latest-box {
+			position: relative;
+			overflow: hidden;
+			padding: 38px;
+			border-radius: 21px;
+			border: 1px solid rgba(126, 139, 255, .18);
+			background: linear-gradient(130deg, rgba(91, 106, 255, .11), rgba(255, 255, 255, .025) 48%, rgba(60, 205, 170, .05));
+		}
+
+		.latest-top {
+			display: flex;
+			align-items: flex-start;
+			justify-content: space-between;
+			gap: 24px;
+			margin-bottom: 28px;
+		}
+
+		.latest-version {
+			font-size: 35px;
+			font-weight: 900;
+			letter-spacing: -1.5px;
+		}
+
+		.latest-badge {
+			padding: 6px 10px;
+			border-radius: 999px;
+			background: #e9ecff;
+			color: #363d84;
+			font-size: 11px;
+			font-weight: 900;
+		}
+
+		.latest-grid {
+			display: grid;
+			grid-template-columns: repeat(2, 1fr);
+			gap: 12px;
+		}
+
+		.latest-item {
+			padding: 18px;
+			border-radius: 13px;
+			background: rgba(0, 0, 0, .14);
+			border: 1px solid rgba(255, 255, 255, .06);
+		}
+
+		.latest-item strong {
+			display: block;
+			margin-bottom: 5px;
+			font-size: 14px;
+		}
+
+		.latest-item p {
+			color: #9098a4;
+			font-size: 13px;
+		}
+
+		.gallery {
+			display: grid;
+			grid-template-columns: repeat(2, 1fr);
+			gap: 14px;
+		}
+
+		.gallery-item {
+			position: relative;
+			overflow: hidden;
+			border-radius: 16px;
+			border: 1px solid rgba(255, 255, 255, .08);
+			background: #0c0f14;
+			cursor: zoom-in;
+		}
+
+		.gallery-item img {
+			width: 100%;
+			height: 100%;
+			display: block;
+			object-fit: cover;
+			transition: transform .35s ease, filter .35s ease;
+		}
+
+		.gallery-item:hover img {
+			transform: scale(1.018);
+			filter: brightness(1.07);
+		}
+
+		.gallery-number {
+			position: absolute;
+			left: 14px;
+			bottom: 14px;
+			padding: 5px 9px;
+			border-radius: 8px;
+			background: rgba(7, 9, 13, .72);
+			backdrop-filter: blur(12px);
+			-webkit-backdrop-filter: blur(12px);
+			border: 1px solid rgba(255, 255, 255, .1);
+			color: #d7dbe0;
+			font-size: 11px;
+			font-weight: 800;
+		}
+
+		.steps {
+			display: grid;
+			gap: 12px;
+		}
+
+		.step {
+			display: grid;
+			grid-template-columns: 56px 1fr;
+			gap: 18px;
+			padding: 20px;
+			border-radius: 15px;
+			border: 1px solid rgba(255, 255, 255, .06);
+			background: rgba(255, 255, 255, .02);
+		}
+
+		.step-num {
+			width: 42px;
+			height: 42px;
+			display: grid;
+			place-items: center;
+			border-radius: 50%;
+			background: #151922;
+			color: #a5adba;
+			font-weight: 850;
+			font-size: 13px;
+		}
+
+		.step h3 {
+			font-size: 15px;
+			margin-bottom: 4px;
+		}
+
+		.step p {
+			font-size: 13px;
+			color: #858d99;
+		}
+
+		.timeline {
+			position: relative;
+			margin-left: 12px;
+			border-left: 1px solid rgba(255, 255, 255, .09);
+		}
+
+		.release {
+			position: relative;
+			margin-left: 30px;
+			padding: 0 0 48px;
+		}
+
+		.release:last-child {
+			padding-bottom: 0;
+		}
+
+		.release::before {
+			content: "";
+			position: absolute;
+			left: -35px;
+			top: 9px;
+			width: 9px;
+			height: 9px;
+			border-radius: 50%;
+			background: #59616d;
+			box-shadow: 0 0 0 5px #090b10;
+		}
+
+		.release.latest::before {
+			background: #8390ff;
+			box-shadow: 0 0 0 5px #090b10, 0 0 18px rgba(131, 144, 255, .65);
+		}
+
+		.release-head {
+			display: flex;
+			align-items: center;
+			gap: 10px;
+			flex-wrap: wrap;
+			margin-bottom: 10px;
+		}
+
+		.release h3 {
+			font-size: 20px;
+		}
+
+		.release-code {
+			color: #606976;
+			font-family: "SFMono-Regular", Consolas, monospace;
+			font-size: 12px;
+		}
+
+		.release ul {
+			padding-left: 18px;
+			color: #8d95a0;
+			font-size: 14px;
+		}
+
+		.release li {
+			margin: 7px 0;
+		}
+
+		.notice {
+			display: grid;
+			grid-template-columns: 1fr 1fr;
+			gap: 16px;
+		}
+
+		.notice-card {
+			padding: 26px;
+			border-radius: 16px;
+			border: 1px solid rgba(255, 255, 255, .07);
+			background: rgba(255, 255, 255, .025);
+		}
+
+		.notice-card.warning {
+			border-color: rgba(255, 190, 82, .13);
+			background: rgba(255, 190, 82, .035);
+		}
+
+		.notice-card h3 {
+			margin-bottom: 12px;
+			font-size: 16px;
+		}
+
+		.notice-card ul {
+			padding-left: 20px;
+			color: #8e96a1;
+			font-size: 13px;
+		}
+
+		.notice-card li {
+			margin: 8px 0;
+		}
+
+		.opensource {
+			margin-top: 20px;
+			padding: 22px;
+			border-radius: 15px;
+			background: linear-gradient(90deg, rgba(255, 255, 255, .04), rgba(255, 255, 255, .018));
+			border: 1px solid rgba(255, 255, 255, .07);
+			color: #8d95a1;
+			font-size: 13px;
+		}
+
+		.opensource strong {
+			color: #dce0e5;
+		}
+
+		.community-grid {
+			display: grid;
+			grid-template-columns: 1.35fr .825fr .825fr;
+			gap: 16px;
+		}
+
+		.community-group {
+			padding: 26px;
+			border-radius: 18px;
+			background: linear-gradient(145deg, rgba(255, 255, 255, .045), rgba(255, 255, 255, .018));
+			border: 1px solid rgba(255, 255, 255, .07);
+		}
+
+		.community-group-head {
+			display: flex;
+			align-items: center;
+			gap: 13px;
+			margin-bottom: 20px;
+		}
+
+		.community-logo {
+			width: 42px;
+			height: 42px;
+			display: grid;
+			place-items: center;
+			flex: 0 0 42px;
+			border-radius: 12px;
+			background: rgba(124, 139, 255, .1);
+			border: 1px solid rgba(124, 139, 255, .14);
+			color: #aeb7ff;
+			font-size: 13px;
+			font-weight: 900;
+		}
+
+		.community-group-head h3 {
+			font-size: 17px;
+			font-weight: 800;
+		}
+
+		.community-group-head p {
+			margin-top: 2px;
+			color: #6f7884;
+			font-size: 12px;
+		}
+
+		.community-links {
+			display: flex;
+			flex-direction: column;
+			gap: 9px;
+		}
+
+		.community-link {
+			position: relative;
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			gap: 14px;
+			padding: 14px 15px;
+			border-radius: 11px;
+			background: rgba(0, 0, 0, .16);
+			border: 1px solid rgba(255, 255, 255, .055);
+			transition: background .2s ease, border-color .2s ease, transform .2s ease;
+		}
+
+		.community-link:hover {
+			transform: translateY(-1px);
+			background: rgba(255, 255, 255, .055);
+			border-color: rgba(255, 255, 255, .11);
+		}
+
+		.community-link-info {
+			min-width: 0;
+		}
+
+		.community-link-title {
+			display: block;
+			color: #dfe3e8;
+			font-size: 13px;
+			font-weight: 700;
+			line-height: 1.5;
+		}
+
+		.community-link-type {
+			display: block;
+			margin-top: 3px;
+			color: #686f7b;
+			font-size: 11px;
+		}
+
+		.community-link-arrow {
+			flex: 0 0 auto;
+			color: #69727e;
+			font-size: 17px;
+			transition: transform .2s ease, color .2s ease;
+		}
+
+		.community-link:hover .community-link-arrow {
+			transform: translateX(3px);
+			color: #bbc2ff;
+		}
+
+		.community-notice {
+			margin-top: 17px;
+			padding: 15px 17px;
+			border-radius: 12px;
+			background: rgba(255, 190, 82, .035);
+			border: 1px solid rgba(255, 190, 82, .1);
+			color: #848b95;
+			font-size: 12px;
+			line-height: 1.7;
+		}
+
+		.community-notice strong {
+			color: #c6cbd2;
+		}
+
+		footer {
+			padding: 48px 0 55px;
+			border-top: 1px solid rgba(255, 255, 255, .055);
+			color: #59616d;
+			font-size: 12px;
+		}
+
+		.footer-inner {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			gap: 20px;
+			flex-wrap: wrap;
+		}
+
+		.footer-brand {
+			display: flex;
+			align-items: center;
+			gap: 10px;
+		}
+
+		.footer-logo {
+			width: 30px;
+			height: 30px;
+			object-fit: contain;
+			border-radius: 7px;
+		}
+
+		.lightbox {
+			position: fixed;
+			inset: 0;
+			z-index: 9999;
+			display: none;
+			align-items: center;
+			justify-content: center;
+			padding: 30px;
+			background: rgba(0, 0, 0, .88);
+			backdrop-filter: blur(12px);
+			-webkit-backdrop-filter: blur(12px);
+		}
+
+		.lightbox.active {
+			display: flex;
+		}
+
+		.lightbox img {
+			max-width: min(1500px, 96vw);
+			max-height: 92vh;
+			border-radius: 14px;
+			box-shadow: 0 30px 100px rgba(0, 0, 0, .7);
+		}
+
+		.lightbox-close {
+			position: fixed;
+			right: 25px;
+			top: 22px;
+			width: 42px;
+			height: 42px;
+			display: grid;
+			place-items: center;
+			border: 1px solid rgba(255, 255, 255, .1);
+			border-radius: 50%;
+			background: rgba(255, 255, 255, .07);
+			color: #ffffff;
+			font-size: 22px;
+			cursor: pointer;
+		}
+
+		@media (max-width: 1050px) {
+			.nav-links {
+				gap: 14px;
+				font-size: 13px;
+			}
+
+			.community-grid {
+				grid-template-columns: 1fr 1fr;
+			}
+
+			.community-group:first-child {
+				grid-column: 1 / -1;
+			}
+		}
+
+		@media (max-width: 850px) {
+			.nav-links {
+				display: none;
+			}
+
+			.hero {
+				padding-top: 70px;
+			}
+
+			.hero h1 {
+				letter-spacing: -2px;
+			}
+
+			.architecture,
+			.feature-grid,
+			.latest-grid,
+			.gallery,
+			.notice,
+			.community-grid {
+				grid-template-columns: 1fr;
+			}
+
+			.community-group:first-child {
+				grid-column: auto;
+			}
+
+			.latest-top,
+			.download-header {
+				flex-direction: column;
+			}
+
+			.gallery-item img {
+				height: auto;
+			}
+		}
+
+		@media (max-width: 650px) {
+			.download-box {
+				padding: 23px;
+			}
+
+			.download-item {
+				align-items: flex-start;
+				flex-direction: column;
+			}
+
+			.download-action {
+				width: 100%;
+			}
+		}
+
+		@media (max-width: 560px) {
+			.container {
+				width: min(100% - 24px, 1180px);
+			}
+
+			.nav-inner {
+				height: 62px;
+			}
+
+			.brand-logo {
+				width: 34px;
+				height: 34px;
+			}
+
+			.brand-text {
+				font-size: 14px;
+			}
+
+			.version-chip {
+				font-size: 11px;
+				padding: 6px 9px;
+			}
+
+			.hero {
+				padding: 55px 0 45px;
+			}
+
+			.hero-logo-wrap,
+			.hero-logo {
+				width: 76px;
+				height: 76px;
+			}
+
+			.hero h1 {
+				font-size: 42px;
+				letter-spacing: -1.8px;
+			}
+
+			.hero-desc {
+				font-size: 15px;
+			}
+
+			.hero-actions {
+				flex-direction: column;
+			}
+
+			.btn {
+				width: 100%;
+			}
+
+			.section {
+				padding: 62px 0;
+			}
+
+			.section-small {
+				padding: 48px 0;
+			}
+
+			.latest-box {
+				padding: 24px;
+			}
+
+			.arch-card {
+				min-height: 200px;
+			}
+
+			.community-group {
+				padding: 20px;
+			}
+
+			.step {
+				grid-template-columns: 46px 1fr;
+				gap: 12px;
+			}
+		}
+	</style>
+</head>
+
+<body>
+
+	<header class="nav">
+		<div class="container nav-inner">
+
+			<a href="#" class="brand">
+				<img
+					src="https://raw.githubusercontent.com/nodesire7/Gamepic/main/img/乐赏logo.webp"
+					alt="GBTGAME Logo"
+					class="brand-logo"
+				>
+				<div class="brand-text">GBTGAME Launcher</div>
+			</a>
+
+			<nav class="nav-links">
+				<a href="#download">下载</a>
+				<a href="#architecture">启动链路</a>
+				<a href="#features">功能</a>
+				<a href="#screenshots">界面</a>
+				<a href="#usage">使用方法</a>
+				<a href="#versions">更新记录</a>
+				<a href="#community">社区</a>
+			</nav>
+
+			<div class="version-chip" id="current-version-chip">v3.0.2 Latest</div>
+
+		</div>
+	</header>
+
+	<main>
+
+		<section class="hero">
+			<div class="container">
+
+				<div class="hero-logo-wrap">
+					<img
+						src="https://raw.githubusercontent.com/nodesire7/Gamepic/main/img/乐赏logo.webp"
+						alt="GBTGAME Logo"
+						class="hero-logo"
+					>
+				</div>
+
+				<div class="hero-badge" id="current-version-hero">GBTGAME Launcher v3.0.2</div>
+
+				<h1>
+					<span class="gradient-text">
+						D加密虚拟化<br>
+						游戏启动器
+					</span>
+				</h1>
+
+				<p class="hero-desc">
+					<strong>GBTGAME Launcher v3.0</strong>
+					是全新独立项目。采用
+					<strong>单 EXE + WebView2</strong>
+					架构，通过
+					<strong>KRK → DSE → VBS / F7</strong>
+					三条启动链路自动回退，并支持启动模式记忆、
+					环境检测、游戏生命周期管理以及系统状态自动恢复。
+				</p>
+
+				<div class="hero-actions">
+					<a href="#download" class="btn btn-primary">立即下载 <span>↓</span></a>
+					<a href="#features" class="btn btn-secondary">查看功能</a>
+					<a href="#screenshots" class="btn btn-secondary">查看界面</a>
+					<a href="#community" class="btn btn-secondary">加入社区</a>
+				</div>
+
+				<div class="hero-meta">
+					<span>Windows 10 / 11</span>
+					<span>WebView2 UI</span>
+					<span>26 项环境检测</span>
+					<span>GPLv3</span>
+				</div>
+
+				<div class="main-preview">
+					<div class="preview-frame">
+						<img
+							src="https://raw.githubusercontent.com/nodesire7/Gamepic/main/img/1.webp"
+							alt="GBTGAME Launcher v3.0.2 主界面"
+							class="zoom-image"
+						>
+					</div>
+				</div>
+
+			</div>
+		</section>
+
+		<section class="section-small" id="video">
+			<div class="container">
+				<div class="section-head">
+					<div class="section-label">Video</div>
+					<h2 class="section-title">视频演示</h2>
+					<p class="section-desc">
+						观看 B 站视频，了解 GBTGAME Launcher 的安装与使用方法。
+					</p>
+				</div>
+				<div class="video-wrap">
+					<iframe
+						src="https://player.bilibili.com/player.html?bvid=BV1mDgK6ZE5z&autoplay=0"
+						title="GBTGAME Launcher 视频演示"
+						allowfullscreen="allowfullscreen"
+						loading="lazy"
+						scrolling="no"
+						frameborder="0"
+						sandbox="allow-top-navigation allow-same-origin allow-forms allow-scripts allow-popups"
+						referrerpolicy="no-referrer"
+					></iframe>
+				</div>
+				<p style="text-align:center; margin-top:14px; color:#89919d; font-size:13px;">
+					原视频链接：
+					<a
+						href="https://www.bilibili.com/video/BV1mDgK6ZE5z"
+						target="_blank"
+						rel="noopener noreferrer"
+						style="color:#8692ff; font-weight:700;"
+					>https://www.bilibili.com/video/BV1mDgK6ZE5z</a>
+				</p>
+			</div>
+		</section>
+
+		<section class="section" id="download">
+			<div class="container">
+
+				<div class="section-head">
+					<div class="section-label">Download</div>
+					<h2 class="section-title">下载 GBTGAME Launcher</h2>
+					<p class="section-desc">
+						当前提供迅雷云盘、GitHub Release 与百度网盘下载。迅雷云盘保持首选，GitHub Release 会自动跟随源仓库最新版本。
+					</p>
+				</div>
+
+				<div class="download-box">
+
+					<div class="download-header">
+						<div>
+							<div class="section-label">Current Version</div>
+							<div class="download-version" id="current-version-download">v3.0.2</div>
+						</div>
+
+						<div class="download-latest">LATEST RELEASE</div>
+					</div>
+
+					<div class="download-list">
+
+						<a
+							class="download-item xunlei"
+							href="https://pan.xunlei.com/s/VOzzwOh6-lb4Pdm3zQe-XW_hA1?pwd=us34"
+							target="_blank"
+							rel="noopener noreferrer"
+						>
+							<div class="download-item-main">
+								<div class="download-icon">迅雷</div>
+								<div class="download-info">
+									<h3>迅雷云盘</h3>
+									<p>推荐下载 · 提取码 us34</p>
+								</div>
+							</div>
+
+							<span class="download-action">立即下载 →</span>
+						</a>
+
+						<a
+							id="github-release-download"
+							class="download-item github"
+							href="https://github.com/nodesire7/GBTGAME-Launcher/releases/download/v3.0.2/GBTGAME.D.v3.0.exe"
+							target="_blank"
+							rel="noopener noreferrer"
+						>
+							<div class="download-item-main">
+								<div class="download-icon">GH</div>
+								<div class="download-info">
+									<h3>GitHub Release</h3>
+									<p id="github-release-meta">自动同步最新发布 · v3.0.2</p>
+								</div>
+							</div>
+
+							<span class="download-action">最新 Release →</span>
+						</a>
+
+						<a
+							class="download-item baidu"
+							href="https://pan.baidu.com/s/1-PLQgLIMdm0T0ZM_zHBKtA?pwd=addp"
+							target="_blank"
+							rel="noopener noreferrer"
+						>
+							<div class="download-item-main">
+								<div class="download-icon">百度</div>
+								<div class="download-info">
+									<h3>百度网盘</h3>
+									<p>备用下载 · 提取码 addp</p>
+								</div>
+							</div>
+
+							<span class="download-action">立即下载 →</span>
+						</a>
+
+					</div>
+
+					<div class="download-password">
+						<strong>下载说明：</strong>
+						迅雷云盘提取码 <strong>us34</strong>，
+						百度网盘提取码 <strong>addp</strong>。
+						下载后建议确认当前版本为
+						<strong id="current-version-download-note">GBTGAME Launcher v3.0.2</strong>。
+					</div>
+
+				</div>
+			</div>
+		</section>
+
+		<section class="section" id="architecture">
+			<div class="container">
+
+				<div class="section-head">
+					<div class="section-label">Architecture</div>
+					<h2 class="section-title">三条启动链路</h2>
+					<p class="section-desc">
+						启动器会根据当前环境和检测结果决定执行链路。
+						正常自动模式下，上一级链路无法工作时，会进入下一条安全回退路径。
+					</p>
+				</div>
+
+				<div class="architecture">
+
+					<div class="arch-card">
+						<div class="arch-index">01 · PRIMARY</div>
+						<div class="arch-title">KRK 内核直通</div>
+						<div class="arch-desc">
+							优先尝试 KernelResearchKit 链路，作为默认第一启动路径。
+						</div>
+						<div class="arch-arrow">失败 → 自动进入 DSE</div>
+						<div class="arch-tag">KRK</div>
+					</div>
+
+					<div class="arch-card">
+						<div class="arch-index">02 · FALLBACK</div>
+						<div class="arch-title">DSE 安全回退</div>
+						<div class="arch-desc">
+							KRK 链路不可用时进入 DSE 路径。游戏退出后自动执行系统状态恢复。
+						</div>
+						<div class="arch-arrow">失败 → 进入 VBS / F7</div>
+						<div class="arch-tag">DSE</div>
+					</div>
+
+					<div class="arch-card">
+						<div class="arch-index">03 · LAST RESORT</div>
+						<div class="arch-title">VBS / F7 兜底</div>
+						<div class="arch-desc">
+							当前两条路径均无法执行时，进入需要重启并配合 Windows F7 启动选项的兜底流程。
+						</div>
+						<div class="arch-tag">F7</div>
+					</div>
+
+				</div>
+			</div>
+		</section>
+
+		<section class="section-small" id="features">
+			<div class="container">
+
+				<div class="section-head">
+					<div class="section-label">Features</div>
+					<h2 class="section-title">v3.0 核心特性</h2>
+				</div>
+
+				<div class="feature-grid">
+
+					<div class="feature">
+						<div class="feature-icon">◫</div>
+						<div>
+							<h3>Chrome 风格自绘标题栏</h3>
+							<p>使用自定义窗口标题栏，包含自定义最小化与关闭按钮，整体界面更加统一。</p>
+						</div>
+					</div>
+
+					<div class="feature">
+						<div class="feature-icon">✓</div>
+						<div>
+							<h3>26 项环境检测</h3>
+							<p>启动前自动检查运行环境，并提供一键环境修复能力。</p>
+						</div>
+					</div>
+
+					<div class="feature">
+						<div class="feature-icon">↻</div>
+						<div>
+							<h3>游戏生命周期管理</h3>
+							<p>跟踪游戏运行状态，并在游戏结束后自动执行必要的系统恢复操作。</p>
+						</div>
+					</div>
+
+					<div class="feature">
+						<div class="feature-icon">⌁</div>
+						<div>
+							<h3>游戏 EXE 自动发现</h3>
+							<p>自动定位游戏程序并弹窗确认，也可以随时通过“重新定位游戏”手动选择。</p>
+						</div>
+					</div>
+
+					<div class="feature">
+						<div class="feature-icon">◆</div>
+						<div>
+							<h3>启动模式记忆</h3>
+							<p>记录上一次使用的启动方式与游戏程序，减少重复选择和配置。</p>
+						</div>
+					</div>
+
+					<div class="feature">
+						<div class="feature-icon">⌫</div>
+						<div>
+							<h3>彻底卸载 / 一键恢复</h3>
+							<p>通过六步幂等清理恢复相关服务、配置、补丁记录及缓存，不影响游戏文件。</p>
+						</div>
+					</div>
+
+					<div class="feature">
+						<div class="feature-icon">#</div>
+						<div>
+							<h3>RTCore64.sys 哈希比对</h3>
+							<p>文件内容一致时不再重复删除和写入，降低不必要的文件变化及安全软件拦截概率。</p>
+						</div>
+					</div>
+
+					<div class="feature">
+						<div class="feature-icon">!</div>
+						<div>
+							<h3>RTCore64.sys 拦截检测</h3>
+							<p>发现文件被安全软件隔离或阻止后，立即停止当前链路并提示恢复，不再继续盲目回退。</p>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</section>
+
+		<section class="section">
+			<div class="container">
+
+				<!-- AUTO:LATEST_CARD:START -->
+				<div class="latest-box">
+
+					<div class="latest-top">
+						<div>
+							<div class="section-label">Latest Release</div>
+							<div class="latest-version">v3.0.2</div>
+						</div>
+						<div class="latest-badge">LATEST</div>
+					</div>
+
+					<div class="latest-grid">
+
+						<div class="latest-item">
+							<strong>蓝屏历史检测</strong>
+							<p>
+								启动前扫描最近 30 天的系统蓝屏转储，
+								检查 SimpleSvm.sys 与 RTCore64.sys 相关历史崩溃记录。
+							</p>
+						</div>
+
+						<div class="latest-item">
+							<strong>关键崩溃代码识别</strong>
+							<p>针对 0x7F、0x109、0x3B、0x50 等相关 BugCheck 进行识别。</p>
+						</div>
+
+						<div class="latest-item">
+							<strong>自动切换手动模式</strong>
+							<p>发现历史蓝屏记录后停止全自动链路，改为由用户手动选择本次启动方式。</p>
+						</div>
+
+						<div class="latest-item">
+							<strong>失败不再自动回退</strong>
+							<p>手动模式下通过左侧链路卡片选择运行方式，当前链路失败后不会自动进入下一条路径。</p>
+						</div>
+
+						<div class="latest-item">
+							<strong>蓝屏信息横幅</strong>
+							<p>主界面直接显示检测到的崩溃代码及转储文件，方便判断当前机器环境状态。</p>
+						</div>
+
+						<div class="latest-item">
+							<strong>处置建议</strong>
+							<p>检测到相关记录后弹窗说明原因，并提供升级 BIOS、退出安全软件等相关检查建议。</p>
+						</div>
+
+					</div>
+				</div>
+				<!-- AUTO:LATEST_CARD:END -->
+			</div>
+		</section>
+
+		<section class="section" id="screenshots">
+			<div class="container">
+
+				<div class="section-head">
+					<div class="section-label">Screenshots</div>
+					<h2 class="section-title">启动器界面</h2>
+					<p class="section-desc">
+						全新的 WebView2 图形界面，将环境状态、启动链路、游戏信息和恢复操作集中在同一界面。
+						点击图片可以查看大图。
+					</p>
+				</div>
+
+				<div class="gallery">
+
+					<div class="gallery-item">
+						<img
+							src="https://raw.githubusercontent.com/nodesire7/Gamepic/main/img/1.webp"
+							alt="GBTGAME Launcher 截图 1"
+							class="zoom-image"
+							loading="lazy"
+						>
+						<div class="gallery-number">01</div>
+					</div>
+
+					<div class="gallery-item">
+						<img
+							src="https://raw.githubusercontent.com/nodesire7/Gamepic/main/img/2.webp"
+							alt="GBTGAME Launcher 截图 2"
+							class="zoom-image"
+							loading="lazy"
+						>
+						<div class="gallery-number">02</div>
+					</div>
+
+					<div class="gallery-item">
+						<img
+							src="https://raw.githubusercontent.com/nodesire7/Gamepic/main/img/3.webp"
+							alt="GBTGAME Launcher 截图 3"
+							class="zoom-image"
+							loading="lazy"
+						>
+						<div class="gallery-number">03</div>
+					</div>
+
+					<div class="gallery-item">
+						<img
+							src="https://raw.githubusercontent.com/nodesire7/Gamepic/main/img/4.webp"
+							alt="GBTGAME Launcher 截图 4"
+							class="zoom-image"
+							loading="lazy"
+						>
+						<div class="gallery-number">04</div>
+					</div>
+
+				</div>
+			</div>
+		</section>
+
+		<section class="section" id="usage">
+			<div class="container">
+
+				<div class="section-head">
+					<div class="section-label">Getting Started</div>
+					<h2 class="section-title">使用方法</h2>
+				</div>
+
+				<div class="steps">
+
+					<div class="step">
+						<div class="step-num">01</div>
+						<div>
+							<h3>放入游戏目录</h3>
+							<p>将启动器 EXE 放在游戏主程序同级目录，或游戏目录的上层目录中，启动器会自动发现游戏程序。</p>
+						</div>
+					</div>
+
+					<div class="step">
+						<div class="step-num">02</div>
+						<div>
+							<h3>运行启动器</h3>
+							<p>启动后自动执行环境检测。环境符合要求后进入对应启动链路。</p>
+						</div>
+					</div>
+
+					<div class="step">
+						<div class="step-num">03</div>
+						<div>
+							<h3>确认游戏程序</h3>
+							<p>自动检测到游戏 EXE 后会弹窗确认。确认后直接运行；点击“重新选择”则进入文件选择窗口。</p>
+						</div>
+					</div>
+
+					<div class="step">
+						<div class="step-num">04</div>
+						<div>
+							<h3>启动游戏</h3>
+							<p>游戏运行期间启动器负责生命周期跟踪，并记录当前使用的运行模式。</p>
+						</div>
+					</div>
+
+					<div class="step">
+						<div class="step-num">05</div>
+						<div>
+							<h3>退出后自动恢复</h3>
+							<p>游戏关闭后自动执行对应恢复操作，尽可能将系统恢复至启动游戏之前的状态。</p>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</section>
+
+		<section class="section" id="versions">
+			<div class="container">
+
+				<div class="section-head">
+					<div class="section-label">Release History</div>
+					<h2 class="section-title">v3.x 版本演进</h2>
+				</div>
+
+				<div class="timeline">
+
+					<!-- AUTO:RELEASE_HISTORY:START -->
+
+<div class="release latest">
+<div class="release-head">
+<h3>v3.0.2</h3>
+<span class="latest-badge">LATEST</span>
+<span class="release-code">main</span>
+</div>
+
+<ul>
+<li>启动前扫描系统蓝屏转储（30 天窗口），识别 SimpleSvm.sys / RTCore64.sys 相关崩溃（0x7F / 0x109 / 0x3B / 0x50）</li>
+<li>检测到历史蓝屏后停止全自动执行，切换手动模式：点击左侧链路卡片选择本次启动方式，失败不自动回退</li>
+<li>横幅显示崩溃代码与转储文件；弹窗说明原因与处置建议（升级 BIOS / 退出安全软件等）</li>
+<li>修复与增强延续 v3.0.1：launcher.ini 写入合并、彻底卸载六步幂等清理、游戏 exe 只确认一次</li>
+</ul>
+
+</div>
+
+<div class="release">
+<div class="release-head">
+<h3>v3.0.1</h3>
+
+<span class="release-code">main</span>
+</div>
+
+<ul>
+<li>修复 launcher.ini 每键一个重复节头的写入缺陷；LastMode/LastRun 在启动游戏前落盘（游戏运行中关闭启动器不丢记录）</li>
+<li>彻底卸载升级：恢复 KRK 残留内核回调补丁；DSE 内核恢复失败时保留补丁记录供重试；按恢复结果清理 KRK 引擎注册表记录</li>
+<li>游戏 exe 只确认一次（确认/手动选择后写入 launcher.ini）</li>
+<li>卸载按钮防连点；卸载确认框披露内核恢复动作</li>
+<li>GitHub 直链下载含 SHA256 校验</li>
+</ul>
+
+</div>
+
+<div class="release">
+<div class="release-head">
+<h3>v3.0.0</h3>
+
+<span class="release-code">main</span>
+</div>
+
+<ul>
+<li>Chrome 风格自绘标题栏（自定义最小化 / 关闭按钮）</li>
+<li>26 项环境检测 + 一键修复</li>
+<li>游戏生命周期管理 + 退出自动恢复系统设置</li>
+<li>**启动 exe 确认弹窗**：自动检测到游戏程序后弹窗确认 —— 确认即直接运行；点「重新选择」进入手动选择（文件对话框），选择结果自动记忆</li>
+<li>重新定位游戏按钮（随时手动选择游戏 exe）</li>
+<li>**彻底卸载 / 一键恢复按钮**：六步幂等清理 —— 虚拟化驱动服务、RTCore64 服务与文件、DSE 残留补丁（注册表持久化原始值，崩溃残留也能一键还原）、VBS 持久设置、环境修复、配置文件与缓存；游戏文件不受影响</li>
+<li>RTCore64.sys 哈希比对：文件一致则不再删除重写，降低安全软件拦截概率</li>
+<li>RTCore64.sys 被拦截检测：检测到安全软件隔离时停止链路并提示恢复，不再盲目回退</li>
+<li>仅支持 Windows 10 / 11（25H2 已实测通过）</li>
+<li>游戏结束时自动恢复 DSE 等系统设置；VBS 链路需要重启并在启动设置中按 F7</li>
+<li>恢复 / 卸载后建议重启 Windows 使设置完全生效</li>
+<li>本项目合并了 KernelResearchKit 与 DSE-Patcher 源码，按 GPLv3 分发</li>
+</ul>
+
+</div>
+
+<!-- AUTO:RELEASE_HISTORY:END -->
+
+				</div>
+			</div>
+		</section>
+
+		<section class="section">
+			<div class="container">
+
+				<div class="section-head">
+					<div class="section-label">Notes</div>
+					<h2 class="section-title">注意事项</h2>
+				</div>
+
+				<div class="notice">
+
+					<div class="notice-card">
+						<h3>系统要求</h3>
+						<ul>
+							<li>仅支持 Windows 10 / Windows 11。</li>
+							<li>Windows 11 25H2 已实测通过。</li>
+							<li>首次运行前请确认 WebView2 运行环境正常。</li>
+							<li>VBS / F7 链路需要重新启动 Windows，并在启动设置中选择 F7。</li>
+						</ul>
+					</div>
+
+					<div class="notice-card warning">
+						<h3>运行提示</h3>
+						<ul>
+							<li>首次运行建议将启动器加入安全软件信任区。</li>
+							<li>火绒等安全软件可能拦截新的程序哈希或驱动文件。</li>
+							<li>游戏退出时请让启动器完成自动恢复流程。</li>
+							<li>执行恢复 / 卸载后建议重新启动 Windows，确保系统设置完全生效。</li>
+						</ul>
+					</div>
+
+				</div>
+
+				<div class="opensource">
+					<strong>开源许可</strong>
+					<br><br>
+					本项目合并了 KernelResearchKit 与 DSE-Patcher 相关源码，
+					并按照 <strong>GPLv3</strong> 许可进行分发。
+				</div>
+
+			</div>
+		</section>
+
+		<section class="section" id="community">
+			<div class="container">
+
+				<div class="section-head">
+					<div class="section-label">Community</div>
+					<h2 class="section-title">加入 GBTGame 社区</h2>
+					<p class="section-desc">
+						遇到游戏启动、环境配置或工具使用问题，可以加入 GBTGame 的 QQ 群、Telegram 或 KOOK 社区。
+					</p>
+				</div>
+
+				<div class="community-grid">
+
+					<div class="community-group">
+
+						<div class="community-group-head">
+							<div class="community-logo">QQ</div>
+							<div>
+								<h3>QQ 群</h3>
+								<p>游戏交流 · 问题解答 · 资源维护</p>
+							</div>
+						</div>
+
+						<div class="community-links">
+
+							<a
+								class="community-link"
+								href="https://qm.qq.com/q/NxJIin5QES"
+								target="_blank"
+								rel="noopener noreferrer"
+							>
+								<div class="community-link-info">
+									<span class="community-link-title">GBTGame游戏问题解答【潜水群】</span>
+									<span class="community-link-type">问题解答</span>
+								</div>
+								<span class="community-link-arrow">→</span>
+							</a>
+
+							<a
+								class="community-link"
+								href="https://qm.qq.com/q/RTiDhICBEc"
+								target="_blank"
+								rel="noopener noreferrer"
+							>
+								<div class="community-link-info">
+									<span class="community-link-title">🖥维护资源软件下载【聊天群 定时清人】</span>
+									<span class="community-link-type">资源维护 · 聊天群</span>
+								</div>
+								<span class="community-link-arrow">→</span>
+							</a>
+
+							<a
+								class="community-link"
+								href="https://qm.qq.com/q/g2xtl7Az8Q"
+								target="_blank"
+								rel="noopener noreferrer"
+							>
+								<div class="community-link-info">
+									<span class="community-link-title">GBTGame论坛3️⃣群【潜水群】</span>
+									<span class="community-link-type">论坛 3 群</span>
+								</div>
+								<span class="community-link-arrow">→</span>
+							</a>
+
+							<a
+								class="community-link"
+								href="https://qm.qq.com/q/dBwKJvffBm"
+								target="_blank"
+								rel="noopener noreferrer"
+							>
+								<div class="community-link-info">
+									<span class="community-link-title">GBTGame论坛2️⃣群【潜水群】</span>
+									<span class="community-link-type">论坛 2 群</span>
+								</div>
+								<span class="community-link-arrow">→</span>
+							</a>
+
+							<a
+								class="community-link"
+								href="https://qm.qq.com/q/L090Uy5OA8"
+								target="_blank"
+								rel="noopener noreferrer"
+							>
+								<div class="community-link-info">
+									<span class="community-link-title">GBTGame论坛1️⃣群【聊天群 定时清人】</span>
+									<span class="community-link-type">论坛 1 群 · 聊天群</span>
+								</div>
+								<span class="community-link-arrow">→</span>
+							</a>
+
+						</div>
+					</div>
+
+					<div class="community-group">
+
+						<div class="community-group-head">
+							<div class="community-logo">TG</div>
+							<div>
+								<h3>Telegram</h3>
+								<p>交流群 · 信息发布频道</p>
+							</div>
+						</div>
+
+						<div class="community-links">
+
+							<a
+								class="community-link"
+								href="https://t.me/GBTGame_Team"
+								target="_blank"
+								rel="noopener noreferrer"
+							>
+								<div class="community-link-info">
+									<span class="community-link-title">GBTGame Team</span>
+									<span class="community-link-type">Telegram 群组</span>
+								</div>
+								<span class="community-link-arrow">→</span>
+							</a>
+
+							<a
+								class="community-link"
+								href="https://t.me/GBTGameinfo"
+								target="_blank"
+								rel="noopener noreferrer"
+							>
+								<div class="community-link-info">
+									<span class="community-link-title">GBTGame Info</span>
+									<span class="community-link-type">Telegram 频道</span>
+								</div>
+								<span class="community-link-arrow">→</span>
+							</a>
+
+						</div>
+					</div>
+
+					<div class="community-group">
+
+						<div class="community-group-head">
+							<div class="community-logo">K</div>
+							<div>
+								<h3>KOOK</h3>
+								<p>GBTGame 社区频道</p>
+							</div>
+						</div>
+
+						<div class="community-links">
+
+							<a
+								class="community-link"
+								href="https://kook.vip/6aQ7xk"
+								target="_blank"
+								rel="noopener noreferrer"
+							>
+								<div class="community-link-info">
+									<span class="community-link-title">GBTGame KOOK 频道</span>
+									<span class="community-link-type">加入 KOOK</span>
+								</div>
+								<span class="community-link-arrow">→</span>
+							</a>
+
+						</div>
+
+						<div class="community-notice">
+							<strong>建议：</strong>
+							工具使用或游戏启动问题优先加入 QQ 问题解答群；
+							需要关注更新与公告可以加入 Telegram 频道。
+						</div>
+
+					</div>
+
+				</div>
+			</div>
+		</section>
+
+	</main>
+
+	<footer>
+		<div class="container footer-inner">
+
+			<div class="footer-brand">
+				<img
+					src="https://raw.githubusercontent.com/nodesire7/Gamepic/main/img/乐赏logo.webp"
+					alt="GBTGAME Logo"
+					class="footer-logo"
+				>
+				<span>GBTGAME Launcher</span>
+			</div>
+
+			<div id="current-version-footer">D加密虚拟化游戏启动器 · v3.0.2</div>
+
+		</div>
+	</footer>
+
+	<div class="lightbox" id="lightbox">
+
+		<button
+			class="lightbox-close"
+			id="lightboxClose"
+			aria-label="关闭"
+		>
+			×
+		</button>
+
+		<img
+			id="lightboxImage"
+			src=""
+			alt="预览大图"
+		>
+
+	</div>
+
+	<script>
+		const lightbox = document.getElementById("lightbox");
+		const lightboxImage = document.getElementById("lightboxImage");
+		const lightboxClose = document.getElementById("lightboxClose");
+
+		document.querySelectorAll(".zoom-image").forEach((image) => {
+			image.addEventListener("click", () => {
+				lightboxImage.src = image.src;
+				lightbox.classList.add("active");
+				document.body.style.overflow = "hidden";
+			});
+		});
+
+		function closeLightbox() {
+			lightbox.classList.remove("active");
+			lightboxImage.src = "";
+			document.body.style.overflow = "";
+		}
+
+		lightboxClose.addEventListener("click", closeLightbox);
+
+		lightbox.addEventListener("click", (event) => {
+			if (event.target === lightbox) {
+				closeLightbox();
+			}
+		});
+
+		document.addEventListener("keydown", (event) => {
+			if (event.key === "Escape") {
+				closeLightbox();
+			}
+		});
+	</script>
+
+</body>
+</html>
