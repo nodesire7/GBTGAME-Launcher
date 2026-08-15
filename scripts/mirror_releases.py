@@ -32,8 +32,14 @@ def gh(args, binary_stdout=None):
     if not shutil.which("gh"):
         raise RuntimeError("gh CLI not found")
     env = dict(os.environ)
+    # The runner's GITHUB_TOKEN is scoped to THIS repo only: it returns 404
+    # for any other repository (even public ones). Source-repo calls must
+    # therefore either use SOURCE_REPO_TOKEN or go unauthenticated.
     if SOURCE_TOKEN:
         env["GH_TOKEN"] = SOURCE_TOKEN
+    else:
+        env.pop("GH_TOKEN", None)
+        env.pop("GITHUB_TOKEN", None)
     if binary_stdout is not None:
         with open(binary_stdout, "wb") as f:
             p = subprocess.run(["gh", "api"] + args, env=env, stdout=f,
