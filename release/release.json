@@ -7,12 +7,12 @@
   "commit": "main",
   "assets": [
     {
-      "name": "GBTGAME.D.v3.0.exe",
-      "size": 859648
+      "name": "GBTGAME.D.v3.0.3.exe",
+      "size": 1482240
     },
     {
       "name": "SHA256SUMS.txt",
-      "size": 86
+      "size": 88
     }
   ],
   "history": [
