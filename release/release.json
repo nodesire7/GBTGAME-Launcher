@@ -1,13 +1,13 @@
 {
   "source": "nodesire7/GBTGAME-D-Launcher-v3.0",
-  "tag": "v3.0.2",
+  "tag": "v3.0.4",
   "name": "GBTGAME D加密虚拟化游戏启动器 v3.0.2",
   "body": "v3.0.2 新增：蓝屏历史检测 + 手动链路选择\n\n- 启动前扫描系统蓝屏转储（30 天窗口），识别 SimpleSvm.sys / RTCore64.sys 相关崩溃（0x7F / 0x109 / 0x3B / 0x50）\n- 检测到历史蓝屏后停止全自动执行，切换手动模式：点击左侧链路卡片选择本次启动方式，失败不自动回退\n- 横幅显示崩溃代码与转储文件；弹窗说明原因与处置建议（升级 BIOS / 退出安全软件等）\n- 修复与增强延续 v3.0.1：launcher.ini 写入合并、彻底卸载六步幂等清理、游戏 exe 只确认一次",
   "published": "2026-08-15T04:33:37Z",
   "commit": "main",
   "assets": [
     {
-      "name": "GBTGAME.D.v3.0.3.exe",
+      "name": "GBTGAME.D.v3.0.4.exe",
       "size": 1482240
     },
     {

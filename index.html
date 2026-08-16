@@ -6,7 +6,7 @@
 
 	<meta
 		name="description"
-		content="GBTGAME D加密虚拟化游戏启动器 v3.0.3 - 全新独立架构，单 EXE + WebView2，支持 KRK、DSE、VBS/F7 多链路启动。"
+		content="GBTGAME D加密虚拟化游戏启动器 v3.0.4 - 全新独立架构，单 EXE + WebView2，支持 KRK、DSE、VBS/F7 多链路启动。"
 	>
 
 	<meta name="theme-color" content="#090b10">
@@ -17,7 +17,7 @@
 		href="https://raw.githubusercontent.com/nodesire7/Gamepic/main/img/乐赏logo.webp"
 	>
 
-	<title>GBTGAME Launcher v3.0.3 - D加密虚拟化游戏启动器</title>
+	<title>GBTGAME Launcher v3.0.4 - D加密虚拟化游戏启动器</title>
 
 	<style>
 		* {
@@ -1307,7 +1307,7 @@
 				<a href="#community">社区</a>
 			</nav>
 
-			<div class="version-chip" id="current-version-chip">v3.0.3 Latest</div>
+			<div class="version-chip" id="current-version-chip">v3.0.4 Latest</div>
 
 		</div>
 	</header>
@@ -1325,7 +1325,7 @@
 					>
 				</div>
 
-				<div class="hero-badge" id="current-version-hero">GBTGAME Launcher v3.0.3</div>
+				<div class="hero-badge" id="current-version-hero">GBTGAME Launcher v3.0.4</div>
 
 				<h1>
 					<span class="gradient-text">
@@ -1364,7 +1364,7 @@
 					<div class="preview-frame">
 						<img
 							src="https://raw.githubusercontent.com/nodesire7/Gamepic/main/img/1.webp"
-							alt="GBTGAME Launcher v3.0.3 主界面"
+							alt="GBTGAME Launcher v3.0.4 主界面"
 							class="zoom-image"
 						>
 					</div>
@@ -1422,7 +1422,7 @@
 					<div class="download-header">
 						<div>
 							<div class="section-label">Current Version</div>
-							<div class="download-version" id="current-version-download">v3.0.3</div>
+							<div class="download-version" id="current-version-download">v3.0.4</div>
 						</div>
 
 						<div class="download-latest">LATEST RELEASE</div>
@@ -1450,7 +1450,7 @@
 						<a
 							id="github-release-download"
 							class="download-item github"
-							href="https://github.com/nodesire7/GBTGAME-Launcher/releases/download/v3.0.3/GBTGAME.D.v3.0.3.exe"
+							href="https://github.com/nodesire7/GBTGAME-Launcher/releases/download/v3.0.4/GBTGAME.D.v3.0.4.exe"
 							target="_blank"
 							rel="noopener noreferrer"
 						>
@@ -1458,7 +1458,7 @@
 								<div class="download-icon">GH</div>
 								<div class="download-info">
 									<h3>GitHub Release</h3>
-									<p id="github-release-meta">自动同步最新发布 · v3.0.3</p>
+									<p id="github-release-meta">自动同步最新发布 · v3.0.4</p>
 								</div>
 							</div>
 
@@ -1489,7 +1489,7 @@
 						迅雷云盘提取码 <strong>us34</strong>，
 						百度网盘提取码 <strong>addp</strong>。
 						下载后建议确认当前版本为
-						<strong id="current-version-download-note">GBTGAME Launcher v3.0.3</strong>。
+						<strong id="current-version-download-note">GBTGAME Launcher v3.0.4</strong>。
 					</div>
 
 				</div>
@@ -1802,8 +1802,25 @@
 
 <div class="release latest">
 <div class="release-head">
-<h3>v3.0.3</h3>
+<h3>v3.0.4</h3>
 <span class="latest-badge">LATEST</span>
+<span class="release-code">main</span>
+</div>
+
+<ul>
+<li>测试模式判断链路审查修复：卸载入口恢复正常模式后不再重复快照恢复；游戏结束退出测试模式成功后同步清除 launcher.ini 的 vbsPending，避免误入 VBS 续接</li>
+<li>内置虚拟化驱动升级：Intel 完整 6 文件（hyperkd.sys + hyperhv/hyperlog/hyperevade/kdserial.dll + hyperlog.inf），AMD SimpleSvm.sys；游戏目录缺失时整套释放到临时目录</li>
+<li>游戏结束后测试模式退出询问；卸载时测试模式门控（先恢复正常模式再恢复配置）</li>
+<li>VBS 启动方式二选一（签名禁用 F7 / 测试模式）</li>
+<li>发布资产更名 GBTGAME.D.v3.0.4.exe</li>
+</ul>
+
+</div>
+
+<div class="release">
+<div class="release-head">
+<h3>v3.0.3</h3>
+
 <span class="release-code">main</span>
 </div>
 
@@ -2129,7 +2146,7 @@
 				<span>GBTGAME Launcher</span>
 			</div>
 
-			<div id="current-version-footer">D加密虚拟化游戏启动器 · v3.0.3</div>
+			<div id="current-version-footer">D加密虚拟化游戏启动器 · v3.0.4</div>
 
 		</div>
 	</footer>
