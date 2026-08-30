@@ -1,14 +1,14 @@
 {
   "source": "nodesire7/GBTGAME-D-Launcher-v3.0",
   "tag": "v3.0.7",
-  "name": "GBTGAME D加密虚拟化游戏启动器 v3.0.2",
-  "body": "v3.0.2 新增：蓝屏历史检测 + 手动链路选择\n\n- 启动前扫描系统蓝屏转储（30 天窗口），识别 SimpleSvm.sys / RTCore64.sys 相关崩溃（0x7F / 0x109 / 0x3B / 0x50）\n- 检测到历史蓝屏后停止全自动执行，切换手动模式：点击左侧链路卡片选择本次启动方式，失败不自动回退\n- 横幅显示崩溃代码与转储文件；弹窗说明原因与处置建议（升级 BIOS / 退出安全软件等）\n- 修复与增强延续 v3.0.1：launcher.ini 写入合并、彻底卸载六步幂等清理、游戏 exe 只确认一次",
-  "published": "2026-08-15T04:33:37Z",
+  "name": "GBTGAME D加密虚拟化游戏启动器 v3.0.7",
+  "body": "v3.0.7 新增：MOD 模式 + CDN 自动更新\n\n- 模式滑块新增 MOD 模式：用户手动选择链路（KRK/DSE/VBS 卡片），工具只负责配置环境（DenuvOwO.ini / reflex.ini 按链路自动配置），不自动启动游戏；环境就绪后等待用户用 mod 启动器自行启动，等待期间可随时关闭窗口并自动恢复链路\n- DenuvOwO.ini 与 reflex.ini 同时独立判断：存在哪个就配置哪个；KRK 链路 AutoLoadHV/autoload=False，其他链路=True\n- 自动更新：启动时经 CDN（launcher.gbtgame.me / jsDelivr / GitHub API 三级回退）检查版本，发现新版本自动下载并替换当前程序，重启后生效\n- 修复 MOD 滑块第三档溢出；修复游戏未启动时 MOD 等待无法关闭窗口的问题",
+  "published": "2026-08-30T10:34:41Z",
   "commit": "main",
   "assets": [
     {
       "name": "GBTGAME.D.v3.0.7.exe",
-      "size": 1499648
+      "size": 1509376
     },
     {
       "name": "SHA256SUMS.txt",
@@ -17,10 +17,10 @@
   ],
   "history": [
     {
-      "tag": "v3.0.2",
-      "name": "GBTGAME D加密虚拟化游戏启动器 v3.0.2",
-      "body": "v3.0.2 新增：蓝屏历史检测 + 手动链路选择\n\n- 启动前扫描系统蓝屏转储（30 天窗口），识别 SimpleSvm.sys / RTCore64.sys 相关崩溃（0x7F / 0x109 / 0x3B / 0x50）\n- 检测到历史蓝屏后停止全自动执行，切换手动模式：点击左侧链路卡片选择本次启动方式，失败不自动回退\n- 横幅显示崩溃代码与转储文件；弹窗说明原因与处置建议（升级 BIOS / 退出安全软件等）\n- 修复与增强延续 v3.0.1：launcher.ini 写入合并、彻底卸载六步幂等清理、游戏 exe 只确认一次",
-      "published": "2026-08-15T04:33:37Z",
+      "tag": "v3.0.7",
+      "name": "GBTGAME D加密虚拟化游戏启动器 v3.0.7",
+      "body": "v3.0.7 新增：MOD 模式 + CDN 自动更新\n\n- 模式滑块新增 MOD 模式：用户手动选择链路（KRK/DSE/VBS 卡片），工具只负责配置环境（DenuvOwO.ini / reflex.ini 按链路自动配置），不自动启动游戏；环境就绪后等待用户用 mod 启动器自行启动，等待期间可随时关闭窗口并自动恢复链路\n- DenuvOwO.ini 与 reflex.ini 同时独立判断：存在哪个就配置哪个；KRK 链路 AutoLoadHV/autoload=False，其他链路=True\n- 自动更新：启动时经 CDN（launcher.gbtgame.me / jsDelivr / GitHub API 三级回退）检查版本，发现新版本自动下载并替换当前程序，重启后生效\n- 修复 MOD 滑块第三档溢出；修复游戏未启动时 MOD 等待无法关闭窗口的问题",
+      "published": "2026-08-30T10:34:41Z",
       "commit": "main"
     },
     {
