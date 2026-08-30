@@ -6,7 +6,7 @@
 
 	<meta
 		name="description"
-		content="GBTGAME D加密虚拟化游戏启动器 v3.0.6 - 全新独立架构，单 EXE + WebView2，支持 KRK、DSE、VBS/F7 多链路启动。"
+		content="GBTGAME D加密虚拟化游戏启动器 v3.0.7 - 全新独立架构，单 EXE + WebView2，支持 KRK、DSE、VBS/F7 多链路启动。"
 	>
 
 	<meta name="theme-color" content="#090b10">
@@ -17,7 +17,7 @@
 		href="https://raw.githubusercontent.com/nodesire7/Gamepic/main/img/乐赏logo.webp"
 	>
 
-	<title>GBTGAME Launcher v3.0.6 - D加密虚拟化游戏启动器</title>
+	<title>GBTGAME Launcher v3.0.7 - D加密虚拟化游戏启动器</title>
 
 	<style>
 		* {
@@ -1307,7 +1307,7 @@
 				<a href="#community">社区</a>
 			</nav>
 
-			<div class="version-chip" id="current-version-chip">v3.0.6 Latest</div>
+			<div class="version-chip" id="current-version-chip">v3.0.7 Latest</div>
 
 		</div>
 	</header>
@@ -1325,7 +1325,7 @@
 					>
 				</div>
 
-				<div class="hero-badge" id="current-version-hero">GBTGAME Launcher v3.0.6</div>
+				<div class="hero-badge" id="current-version-hero">GBTGAME Launcher v3.0.7</div>
 
 				<h1>
 					<span class="gradient-text">
@@ -1364,7 +1364,7 @@
 					<div class="preview-frame">
 						<img
 							src="https://raw.githubusercontent.com/nodesire7/Gamepic/main/img/1.webp"
-							alt="GBTGAME Launcher v3.0.6 主界面"
+							alt="GBTGAME Launcher v3.0.7 主界面"
 							class="zoom-image"
 						>
 					</div>
@@ -1422,7 +1422,7 @@
 					<div class="download-header">
 						<div>
 							<div class="section-label">Current Version</div>
-							<div class="download-version" id="current-version-download">v3.0.6</div>
+							<div class="download-version" id="current-version-download">v3.0.7</div>
 						</div>
 
 						<div class="download-latest">LATEST RELEASE</div>
@@ -1450,7 +1450,7 @@
 						<a
 							id="github-release-download"
 							class="download-item github"
-							href="https://github.com/nodesire7/GBTGAME-Launcher/releases/download/v3.0.6/GBTGAME.D.v3.0.6.exe"
+							href="https://github.com/nodesire7/GBTGAME-Launcher/releases/download/v3.0.7/GBTGAME.D.v3.0.7.exe"
 							target="_blank"
 							rel="noopener noreferrer"
 						>
@@ -1458,7 +1458,7 @@
 								<div class="download-icon">GH</div>
 								<div class="download-info">
 									<h3>GitHub Release</h3>
-									<p id="github-release-meta">自动同步最新发布 · v3.0.6</p>
+									<p id="github-release-meta">自动同步最新发布 · v3.0.7</p>
 								</div>
 							</div>
 
@@ -1489,7 +1489,7 @@
 						迅雷云盘提取码 <strong>us34</strong>，
 						百度网盘提取码 <strong>addp</strong>。
 						下载后建议确认当前版本为
-						<strong id="current-version-download-note">GBTGAME Launcher v3.0.6</strong>。
+						<strong id="current-version-download-note">GBTGAME Launcher v3.0.7</strong>。
 					</div>
 
 				</div>
@@ -1802,8 +1802,24 @@
 
 <div class="release latest">
 <div class="release-head">
-<h3>v3.0.6</h3>
+<h3>v3.0.7</h3>
 <span class="latest-badge">LATEST</span>
+<span class="release-code">main</span>
+</div>
+
+<ul>
+<li>新增 MOD 模式（自动/手动/MOD 三态滑块）：只搭建环境不启动游戏，等待用户用 mod 启动器自行启动，进程退出即结束</li>
+<li>配置优先级：游戏目录 DenuvOwO.ini 存在则改其 [Config] AutoLoadHV（KRK→False，其他链路→True）；无则改 reflex.ini；两者都无用默认 reflex.ini</li>
+<li>自动/手动链路保持原行为（自动启动游戏）</li>
+<li>保留：更新检查（CDN 三级回退）、高 DPI 支持、测试模式恢复、内置驱动</li>
+</ul>
+
+</div>
+
+<div class="release">
+<div class="release-head">
+<h3>v3.0.6</h3>
+
 <span class="release-code">main</span>
 </div>
 
@@ -2178,7 +2194,7 @@
 				<span>GBTGAME Launcher</span>
 			</div>
 
-			<div id="current-version-footer">D加密虚拟化游戏启动器 · v3.0.6</div>
+			<div id="current-version-footer">D加密虚拟化游戏启动器 · v3.0.7</div>
 
 		</div>
 	</footer>
