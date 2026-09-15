@@ -6,7 +6,7 @@
 
 	<meta
 		name="description"
-		content="GBTGAME D加密虚拟化游戏启动器 v3.0.7 - 全新独立架构，单 EXE + WebView2，支持 KRK、DSE、VBS/F7 多链路启动。"
+		content="GBTGAME D加密虚拟化游戏启动器 v3.0.8 - 全新独立架构，单 EXE + WebView2，支持 KRK、DSE、VBS/F7 多链路启动。"
 	>
 
 	<meta name="theme-color" content="#090b10">
@@ -17,7 +17,7 @@
 		href="https://raw.githubusercontent.com/nodesire7/Gamepic/main/img/乐赏logo.webp"
 	>
 
-	<title>GBTGAME Launcher v3.0.7 - D加密虚拟化游戏启动器</title>
+	<title>GBTGAME Launcher v3.0.8 - D加密虚拟化游戏启动器</title>
 
 	<style>
 		* {
@@ -1307,7 +1307,7 @@
 				<a href="#community">社区</a>
 			</nav>
 
-			<div class="version-chip" id="current-version-chip">v3.0.7 Latest</div>
+			<div class="version-chip" id="current-version-chip">v3.0.8 Latest</div>
 
 		</div>
 	</header>
@@ -1325,7 +1325,7 @@
 					>
 				</div>
 
-				<div class="hero-badge" id="current-version-hero">GBTGAME Launcher v3.0.7</div>
+				<div class="hero-badge" id="current-version-hero">GBTGAME Launcher v3.0.8</div>
 
 				<h1>
 					<span class="gradient-text">
@@ -1364,7 +1364,7 @@
 					<div class="preview-frame">
 						<img
 							src="https://raw.githubusercontent.com/nodesire7/Gamepic/main/img/1.webp"
-							alt="GBTGAME Launcher v3.0.7 主界面"
+							alt="GBTGAME Launcher v3.0.8 主界面"
 							class="zoom-image"
 						>
 					</div>
@@ -1422,7 +1422,7 @@
 					<div class="download-header">
 						<div>
 							<div class="section-label">Current Version</div>
-							<div class="download-version" id="current-version-download">v3.0.7</div>
+							<div class="download-version" id="current-version-download">v3.0.8</div>
 						</div>
 
 						<div class="download-latest">LATEST RELEASE</div>
@@ -1450,7 +1450,7 @@
 						<a
 							id="github-release-download"
 							class="download-item github"
-							href="https://github.com/nodesire7/GBTGAME-Launcher/releases/download/v3.0.7/GBTGAME.D.v3.0.7.exe"
+							href="https://github.com/nodesire7/GBTGAME-Launcher/releases/download/v3.0.8/GBTGAME.D.v3.0.8.exe"
 							target="_blank"
 							rel="noopener noreferrer"
 						>
@@ -1458,7 +1458,7 @@
 								<div class="download-icon">GH</div>
 								<div class="download-info">
 									<h3>GitHub Release</h3>
-									<p id="github-release-meta">自动同步最新发布 · v3.0.7</p>
+									<p id="github-release-meta">自动同步最新发布 · v3.0.8</p>
 								</div>
 							</div>
 
@@ -1489,7 +1489,7 @@
 						迅雷云盘提取码 <strong>us34</strong>，
 						百度网盘提取码 <strong>addp</strong>。
 						下载后建议确认当前版本为
-						<strong id="current-version-download-note">GBTGAME Launcher v3.0.7</strong>。
+						<strong id="current-version-download-note">GBTGAME Launcher v3.0.8</strong>。
 					</div>
 
 				</div>
@@ -1802,8 +1802,25 @@
 
 <div class="release latest">
 <div class="release-head">
-<h3>v3.0.7</h3>
+<h3>v3.0.8</h3>
 <span class="latest-badge">LATEST</span>
+<span class="release-code">main</span>
+</div>
+
+<ul>
+<li>多分辨率适配：完整支持 4K / 2K / 1080P / 720P 与 100%–300% 系统缩放，字体与布局按比例缩放不变形、不裁切</li>
+<li>WebView2 按显示器 DPI 设置光栅化比例（RasterizationScale = DPI/96），高缩放屏上文字清晰不发虚</li>
+<li>页面按 1180×720 设计画布等比缩放（ZoomFactor 1.0–2.4）：2K/4K 大窗口整体放大，小窗口由流式布局与媒体查询压缩，最小 900×560 仍完整可用</li>
+<li>窗口默认尺寸与最小尺寸随 DPI 自动换算（4K@200% 下最小 1800×1120 物理像素）</li>
+<li>版本号统一取自 exe 版本资源（标题栏与界面右上角自动同步），新增 --size=WxH 指定窗口尺寸便于多分辨率验证</li>
+<li>保留：MOD 模式、CDN 三级更新检查与自动更新、测试模式恢复、内置驱动</li>
+</ul>
+
+</div>
+
+<div class="release">
+<div class="release-head">
+<h3>v3.0.7</h3>
 <span class="release-code">main</span>
 </div>
 
@@ -2194,7 +2211,7 @@
 				<span>GBTGAME Launcher</span>
 			</div>
 
-			<div id="current-version-footer">D加密虚拟化游戏启动器 · v3.0.7</div>
+			<div id="current-version-footer">D加密虚拟化游戏启动器 · v3.0.8</div>
 
 		</div>
 	</footer>

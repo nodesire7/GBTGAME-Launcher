@@ -1,14 +1,14 @@
 {
   "source": "nodesire7/GBTGAME-D-Launcher-v3.0",
-  "tag": "v3.0.7",
-  "name": "GBTGAME D加密虚拟化游戏启动器 v3.0.7",
-  "body": "v3.0.7 新增：MOD 模式 + CDN 自动更新\n\n- 模式滑块新增 MOD 模式：用户手动选择链路（KRK/DSE/VBS 卡片），工具只负责配置环境（DenuvOwO.ini / reflex.ini 按链路自动配置），不自动启动游戏；环境就绪后等待用户用 mod 启动器自行启动，等待期间可随时关闭窗口并自动恢复链路\n- DenuvOwO.ini 与 reflex.ini 同时独立判断：存在哪个就配置哪个；KRK 链路 AutoLoadHV/autoload=False，其他链路=True\n- 自动更新：启动时经 CDN（launcher.gbtgame.me / jsDelivr / GitHub API 三级回退）检查版本，发现新版本自动下载并替换当前程序，重启后生效\n- 修复 MOD 滑块第三档溢出；修复游戏未启动时 MOD 等待无法关闭窗口的问题",
-  "published": "2026-08-30T10:34:41Z",
+  "tag": "v3.0.8",
+  "name": "GBTGAME D加密虚拟化游戏启动器 v3.0.8",
+  "body": "v3.0.8 多分辨率适配（4K/2K/1080P/720P + 100%–300% 缩放）\n\n- 完整支持 4K / 2K / 1080P / 720P 与 100%–300% 系统缩放，字体与布局按比例缩放不变形、不裁切\n- WebView2 按显示器 DPI 设置光栅化比例（RasterizationScale = DPI/96），高缩放屏上文字清晰不发虚\n- 页面按 1180×720 设计画布等比缩放（ZoomFactor 1.0–2.4）：2K/4K 大窗口整体放大，小窗口由流式布局与媒体查询压缩，最小 900×560 仍完整可用\n- 窗口默认尺寸与最小尺寸随 DPI 自动换算（4K@200% 下最小 1800×1120 物理像素）\n- 版本号统一取自 exe 版本资源（标题栏与界面右上角自动同步），新增 --size=WxH 指定窗口尺寸便于多分辨率验证\n- 保留：MOD 模式、CDN 三级更新检查与自动更新、测试模式恢复、内置驱动",
+  "published": "2026-09-15T10:20:47Z",
   "commit": "main",
   "assets": [
     {
-      "name": "GBTGAME.D.v3.0.7.exe",
-      "size": 1509376
+      "name": "GBTGAME.D.v3.0.8.exe",
+      "size": 1514496
     },
     {
       "name": "SHA256SUMS.txt",
@@ -16,6 +16,13 @@
     }
   ],
   "history": [
+    {
+      "tag": "v3.0.8",
+      "name": "GBTGAME D加密虚拟化游戏启动器 v3.0.8",
+      "body": "v3.0.8 多分辨率适配（4K/2K/1080P/720P + 100%–300% 缩放）\n\n- 完整支持 4K / 2K / 1080P / 720P 与 100%–300% 系统缩放，字体与布局按比例缩放不变形、不裁切\n- WebView2 按显示器 DPI 设置光栅化比例（RasterizationScale = DPI/96），高缩放屏上文字清晰不发虚\n- 页面按 1180×720 设计画布等比缩放（ZoomFactor 1.0–2.4）：2K/4K 大窗口整体放大，小窗口由流式布局与媒体查询压缩，最小 900×560 仍完整可用\n- 窗口默认尺寸与最小尺寸随 DPI 自动换算（4K@200% 下最小 1800×1120 物理像素）\n- 版本号统一取自 exe 版本资源（标题栏与界面右上角自动同步），新增 --size=WxH 指定窗口尺寸便于多分辨率验证\n- 保留：MOD 模式、CDN 三级更新检查与自动更新、测试模式恢复、内置驱动",
+      "published": "2026-09-15T10:20:47Z",
+      "commit": "main"
+    },
     {
       "tag": "v3.0.7",
       "name": "GBTGAME D加密虚拟化游戏启动器 v3.0.7",
