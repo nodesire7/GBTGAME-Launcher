@@ -1,3 +1,3 @@
-v3.0.9
-https://launcher.gbtgame.me/release/GBTGAME.D.v3.0.9.exe
-59034bb7896a029b5e7842230604dd58313aba29d2d577dfba66547b38eb3f31
+v3.0.10
+https://launcher.gbtgame.me/release/GBTGAME.D.v3.0.10.exe
+336300b3ae0eb565ad0a96e7ed018cba3c4e45c4ba42f0498e1179221de651b6
