@@ -6,7 +6,7 @@
 
 	<meta
 		name="description"
-		content="GBTGAME D加密虚拟化游戏启动器 v3.0.12 - 全新独立架构，单 EXE + WebView2，支持 KRK、DSE、VBS/F7 多链路启动。"
+		content="GBTGAME D加密虚拟化游戏启动器 v3.0.13 - 全新独立架构，单 EXE + WebView2，支持 KRK、DSE、VBS/F7 多链路启动。"
 	>
 
 	<meta name="theme-color" content="#090b10">
@@ -17,7 +17,7 @@
 		href="https://raw.githubusercontent.com/nodesire7/Gamepic/main/img/乐赏logo.webp"
 	>
 
-	<title>GBTGAME Launcher v3.0.12 - D加密虚拟化游戏启动器</title>
+	<title>GBTGAME Launcher v3.0.13 - D加密虚拟化游戏启动器</title>
 
 	<style>
 		* {
@@ -1307,7 +1307,7 @@
 				<a href="#community">社区</a>
 			</nav>
 
-			<div class="version-chip" id="current-version-chip">v3.0.12 Latest</div>
+			<div class="version-chip" id="current-version-chip">v3.0.13 Latest</div>
 
 		</div>
 	</header>
@@ -1325,7 +1325,7 @@
 					>
 				</div>
 
-				<div class="hero-badge" id="current-version-hero">GBTGAME Launcher v3.0.12</div>
+				<div class="hero-badge" id="current-version-hero">GBTGAME Launcher v3.0.13</div>
 
 				<h1>
 					<span class="gradient-text">
@@ -1364,7 +1364,7 @@
 					<div class="preview-frame">
 						<img
 							src="https://raw.githubusercontent.com/nodesire7/Gamepic/main/img/1.webp"
-							alt="GBTGAME Launcher v3.0.12 主界面"
+							alt="GBTGAME Launcher v3.0.13 主界面"
 							class="zoom-image"
 						>
 					</div>
@@ -1422,7 +1422,7 @@
 					<div class="download-header">
 						<div>
 							<div class="section-label">Current Version</div>
-							<div class="download-version" id="current-version-download">v3.0.12</div>
+							<div class="download-version" id="current-version-download">v3.0.13</div>
 						</div>
 
 						<div class="download-latest">LATEST RELEASE</div>
@@ -1450,7 +1450,7 @@
 						<a
 							id="github-release-download"
 							class="download-item github"
-							href="https://github.com/nodesire7/GBTGAME-Launcher/releases/download/v3.0.12/GBTGAME.D.v3.0.12.exe"
+							href="https://github.com/nodesire7/GBTGAME-Launcher/releases/download/v3.0.13/GBTGAME.D.v3.0.13.exe"
 							target="_blank"
 							rel="noopener noreferrer"
 						>
@@ -1458,7 +1458,7 @@
 								<div class="download-icon">GH</div>
 								<div class="download-info">
 									<h3>GitHub Release</h3>
-									<p id="github-release-meta">自动同步最新发布 · v3.0.12</p>
+									<p id="github-release-meta">自动同步最新发布 · v3.0.13</p>
 								</div>
 							</div>
 
@@ -1489,7 +1489,7 @@
 						迅雷云盘提取码 <strong>us34</strong>，
 						百度网盘提取码 <strong>addp</strong>。
 						下载后建议确认当前版本为
-						<strong id="current-version-download-note">GBTGAME Launcher v3.0.12</strong>。
+						<strong id="current-version-download-note">GBTGAME Launcher v3.0.13</strong>。
 					</div>
 
 				</div>
@@ -1802,8 +1802,25 @@
 
 <div class="release latest">
 <div class="release-head">
-<h3>v3.0.12</h3>
+<h3>v3.0.13</h3>
 <span class="latest-badge">LATEST</span>
+<span class="release-code">main</span>
+</div>
+
+<ul>
+<li><strong>修复 MOD 模式进程监控</strong>：此前 MOD 模式等待游戏时，界面与日志始终显示「游戏尚未启动」，即使游戏已经在运行；现在检测到游戏启动的瞬间即上报真实进程（名称 + PID），阶段显示「MOD · 游戏运行中」，直到游戏退出才恢复链路</li>
+<li>等待期间每 30 秒输出一次状态；等待超过 1 分钟时在日志中列出<strong>游戏目录内正在运行的进程</strong>，进程名不一致时可直接从日志确认真实程序名</li>
+<li>进程匹配更稳：先按名称精确匹配（不区分大小写），30 秒后接受同名前缀的变体（<code>FC27_Showcase.exe</code> 对应 <code>FC27.exe</code>），并在日志中说明实际匹配到的进程</li>
+<li>游戏自我重启（EA / 反作弊重新拉起）不再误判为已退出：进程消失后保留 5 秒宽限期，期间重新出现则继续监控，避免过早恢复链路</li>
+<li>MOD 开始前若目标进程已在运行（上次残留），日志会明确提示，避免恢复时机错误</li>
+<li><strong>不再向系统盘临时目录写入任何文件</strong>：启动日志写入启动器目录下的运行目录（<code>.GBTGAME-v3-runtime</code>），WebView2 安装包也下载到该目录，退出时一并清理；构建脚本与自动化测试同样只在项目所在盘读写（测试临时数据 <code>.testtmp</code>、编译中间文件 <code>.build-tmp</code> 均在项目内并自动删除）</li>
+<li>新增 6 项进程监控测试（精确匹配 / 进程缺失 / 变体前缀 / 启动检测 / 延迟启动 / 终止取消），测试总数 86 项、断言 576 项全部通过</li>
+</ul>
+
+</div>
+<div class="release">
+<div class="release-head">
+<h3>v3.0.12</h3>
 <span class="release-code">main</span>
 </div>
 
@@ -2277,7 +2294,7 @@
 				<span>GBTGAME Launcher</span>
 			</div>
 
-			<div id="current-version-footer">D加密虚拟化游戏启动器 · v3.0.12</div>
+			<div id="current-version-footer">D加密虚拟化游戏启动器 · v3.0.13</div>
 
 		</div>
 	</footer>
