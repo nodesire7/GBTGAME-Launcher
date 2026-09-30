@@ -6,7 +6,7 @@
 
 	<meta
 		name="description"
-		content="GBTGAME D加密虚拟化游戏启动器 v3.0.13 - 全新独立架构，单 EXE + WebView2，支持 KRK、DSE、VBS/F7 多链路启动。"
+		content="GBTGAME D加密虚拟化游戏启动器 v3.0.14 - 全新独立架构，单 EXE + WebView2，支持 KRK、DSE、VBS/F7 多链路启动。"
 	>
 
 	<meta name="theme-color" content="#090b10">
@@ -17,7 +17,7 @@
 		href="https://raw.githubusercontent.com/nodesire7/Gamepic/main/img/乐赏logo.webp"
 	>
 
-	<title>GBTGAME Launcher v3.0.13 - D加密虚拟化游戏启动器</title>
+	<title>GBTGAME Launcher v3.0.14 - D加密虚拟化游戏启动器</title>
 
 	<style>
 		* {
@@ -1307,7 +1307,7 @@
 				<a href="#community">社区</a>
 			</nav>
 
-			<div class="version-chip" id="current-version-chip">v3.0.13 Latest</div>
+			<div class="version-chip" id="current-version-chip">v3.0.14 Latest</div>
 
 		</div>
 	</header>
@@ -1325,7 +1325,7 @@
 					>
 				</div>
 
-				<div class="hero-badge" id="current-version-hero">GBTGAME Launcher v3.0.13</div>
+				<div class="hero-badge" id="current-version-hero">GBTGAME Launcher v3.0.14</div>
 
 				<h1>
 					<span class="gradient-text">
@@ -1364,7 +1364,7 @@
 					<div class="preview-frame">
 						<img
 							src="https://raw.githubusercontent.com/nodesire7/Gamepic/main/img/1.webp"
-							alt="GBTGAME Launcher v3.0.13 主界面"
+							alt="GBTGAME Launcher v3.0.14 主界面"
 							class="zoom-image"
 						>
 					</div>
@@ -1422,7 +1422,7 @@
 					<div class="download-header">
 						<div>
 							<div class="section-label">Current Version</div>
-							<div class="download-version" id="current-version-download">v3.0.13</div>
+							<div class="download-version" id="current-version-download">v3.0.14</div>
 						</div>
 
 						<div class="download-latest">LATEST RELEASE</div>
@@ -1450,7 +1450,7 @@
 						<a
 							id="github-release-download"
 							class="download-item github"
-							href="https://github.com/nodesire7/GBTGAME-Launcher/releases/download/v3.0.13/GBTGAME.D.v3.0.13.exe"
+							href="https://github.com/nodesire7/GBTGAME-Launcher/releases/download/v3.0.14/GBTGAME.D.v3.0.14.exe"
 							target="_blank"
 							rel="noopener noreferrer"
 						>
@@ -1458,7 +1458,7 @@
 								<div class="download-icon">GH</div>
 								<div class="download-info">
 									<h3>GitHub Release</h3>
-									<p id="github-release-meta">自动同步最新发布 · v3.0.13</p>
+									<p id="github-release-meta">自动同步最新发布 · v3.0.14</p>
 								</div>
 							</div>
 
@@ -1489,7 +1489,7 @@
 						迅雷云盘提取码 <strong>us34</strong>，
 						百度网盘提取码 <strong>addp</strong>。
 						下载后建议确认当前版本为
-						<strong id="current-version-download-note">GBTGAME Launcher v3.0.13</strong>。
+						<strong id="current-version-download-note">GBTGAME Launcher v3.0.14</strong>。
 					</div>
 
 				</div>
@@ -1802,8 +1802,24 @@
 
 <div class="release latest">
 <div class="release-head">
-<h3>v3.0.13</h3>
+<h3>v3.0.14</h3>
 <span class="latest-badge">LATEST</span>
+<span class="release-code">main</span>
+</div>
+
+<ul>
+<li><strong>首次启动不再直接启动游戏</strong>：先询问自动检测到的游戏程序是否正确（正确，记住该程序 / 不正确，更换程序）</li>
+<li>程序确认后不立即启动，而是询问本次启动模式（自动 / 手动 / MOD）；选择手动或 MOD 时继续询问链路（<code>KRK 内核直通</code> / <code>DSE 安全回退</code> / <code>VBS / F7 兜底</code>）</li>
+<li>只有在<strong>模式与链路都确定之后</strong>才执行链路并启动游戏；MOD 模式仍然只配置环境、不启动游戏</li>
+<li>选择「更换程序」时若取消文件选择，则本次不启动任何程序；手动 / MOD 模式下点击链路卡片进入时链路已确定，只确认游戏程序，不重复询问</li>
+<li>首次流程的全部询问都发生在任何链路执行之前，不会先挂驱动再询问</li>
+<li>新增 9 项首次启动流程测试（是否需要询问 / 询问顺序 / 自动模式不询问链路 / MOD 询问链路 / 更换程序 / 取消不启动 / 链路已确定 / 未找到程序 / 记忆路径失效），测试总数 95 项、断言 629 项全部通过</li>
+</ul>
+
+</div>
+<div class="release">
+<div class="release-head">
+<h3>v3.0.13</h3>
 <span class="release-code">main</span>
 </div>
 
@@ -2295,7 +2311,7 @@
 				<span>GBTGAME Launcher</span>
 			</div>
 
-			<div id="current-version-footer">D加密虚拟化游戏启动器 · v3.0.13</div>
+			<div id="current-version-footer">D加密虚拟化游戏启动器 · v3.0.14</div>
 
 		</div>
 	</footer>
