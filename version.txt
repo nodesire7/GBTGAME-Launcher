@@ -1,3 +1,3 @@
-v3.0.13
-https://launcher.gbtgame.me/release/GBTGAME.D.v3.0.13.exe
-cc13d02aeacd67bc8d6084c4b6ff884cf040ba2636950762ab720a3bf12fa0ca
+v3.0.14
+https://launcher.gbtgame.me/release/GBTGAME.D.v3.0.14.exe
+a39dfc944507379cc73f3868812d892fb56fbf8349bb8a3007f27a8d50c1fdd3
