@@ -6,7 +6,7 @@
 
 	<meta
 		name="description"
-		content="GBTGAME D加密虚拟化游戏启动器 v3.0.19 - 全新独立架构，单 EXE + WebView2，支持 KRK、DSE、VBS/F7 多链路启动。"
+		content="GBTGAME D加密虚拟化游戏启动器 v3.0.20 - 全新独立架构，单 EXE + WebView2，支持 KRK、DSE、VBS/F7 多链路启动。"
 	>
 
 	<meta name="theme-color" content="#090b10">
@@ -17,7 +17,7 @@
 		href="https://raw.githubusercontent.com/nodesire7/Gamepic/main/img/乐赏logo.webp"
 	>
 
-	<title>GBTGAME Launcher v3.0.19 - D加密虚拟化游戏启动器</title>
+	<title>GBTGAME Launcher v3.0.20 - D加密虚拟化游戏启动器</title>
 
 	<style>
 		* {
@@ -1307,7 +1307,7 @@
 				<a href="#community">社区</a>
 			</nav>
 
-			<div class="version-chip" id="current-version-chip">v3.0.19 Latest</div>
+			<div class="version-chip" id="current-version-chip">v3.0.20 Latest</div>
 
 		</div>
 	</header>
@@ -1325,7 +1325,7 @@
 					>
 				</div>
 
-				<div class="hero-badge" id="current-version-hero">GBTGAME Launcher v3.0.19</div>
+				<div class="hero-badge" id="current-version-hero">GBTGAME Launcher v3.0.20</div>
 
 				<h1>
 					<span class="gradient-text">
@@ -1364,7 +1364,7 @@
 					<div class="preview-frame">
 						<img
 							src="https://raw.githubusercontent.com/nodesire7/Gamepic/main/img/1.webp"
-							alt="GBTGAME Launcher v3.0.19 主界面"
+							alt="GBTGAME Launcher v3.0.20 主界面"
 							class="zoom-image"
 						>
 					</div>
@@ -1422,7 +1422,7 @@
 					<div class="download-header">
 						<div>
 							<div class="section-label">Current Version</div>
-							<div class="download-version" id="current-version-download">v3.0.19</div>
+							<div class="download-version" id="current-version-download">v3.0.20</div>
 						</div>
 
 						<div class="download-latest">LATEST RELEASE</div>
@@ -1450,7 +1450,7 @@
 						<a
 							id="github-release-download"
 							class="download-item github"
-							href="https://github.com/nodesire7/GBTGAME-Launcher/releases/download/v3.0.19/GBTGAME.D.v3.0.19.exe"
+							href="https://github.com/nodesire7/GBTGAME-Launcher/releases/download/v3.0.20/GBTGAME.D.v3.0.20.exe"
 							target="_blank"
 							rel="noopener noreferrer"
 						>
@@ -1458,7 +1458,7 @@
 								<div class="download-icon">GH</div>
 								<div class="download-info">
 									<h3>GitHub Release</h3>
-									<p id="github-release-meta">自动同步最新发布 · v3.0.19</p>
+									<p id="github-release-meta">自动同步最新发布 · v3.0.20</p>
 								</div>
 							</div>
 
@@ -1489,7 +1489,7 @@
 						迅雷云盘提取码 <strong>us34</strong>，
 						百度网盘提取码 <strong>addp</strong>。
 						下载后建议确认当前版本为
-						<strong id="current-version-download-note">GBTGAME Launcher v3.0.19</strong>。
+						<strong id="current-version-download-note">GBTGAME Launcher v3.0.20</strong>。
 					</div>
 
 				</div>
@@ -1802,8 +1802,24 @@
 
 <div class="release latest">
 <div class="release-head">
-<h3>v3.0.19</h3>
+<h3>v3.0.20</h3>
 <span class="latest-badge">LATEST</span>
+<span class="release-code">main</span>
+</div>
+
+<ul>
+<li><strong>修复 DSE 在 Windows 10 22H2 找不到 g_CiOptions</strong>：<code>DseFindCipInitialize</code> 返回的是相对 CiInitialize 入口的偏移，旧代码却当成镜像 RVA 使用，扫描地址整体少了 CiInitialize 的 RVA，所以官方 <code>DSE-Patcher.exe</code> 能找到而启动器提示“未定位 g_CiOptions”</li>
+<li>新增 <code>DseFindCipInitializeRva</code> 正确叠加 CiInitialize RVA，并增加单元测试（CiInitialize@0x1000 → CipInitialize@0x3256）</li>
+<li>特征序列不匹配时增加备用扫描：反向遍历 CiInitialize 前 0x100 字节的所有 call，逐个验证目标函数内的 RIP-relative store，仍然只读、不写内核</li>
+<li>修正 g_CiOptions 值校验：不再使用固定 <code>{0,1,6}</code> 或 raw bit0，而是与 CI 查询状态匹配（启用=非零，已 patch=0），可识别 <code>0x0100000E</code> 等带标志位的值</li>
+<li>扫描所有 RIP-relative store 形式（<code>89</code> / <code>C7</code>），无效候选继续扫描而不是提前退出；日志新增 CiInitialize RVA → CipInitialize RVA 诊断</li>
+<li>测试 111 项、断言 722 项全部通过</li>
+</ul>
+
+</div>
+<div class="release">
+<div class="release-head">
+<h3>v3.0.19</h3>
 <span class="release-code">main</span>
 </div>
 
@@ -2394,7 +2410,7 @@
 				<span>GBTGAME Launcher</span>
 			</div>
 
-			<div id="current-version-footer">D加密虚拟化游戏启动器 · v3.0.19</div>
+			<div id="current-version-footer">D加密虚拟化游戏启动器 · v3.0.20</div>
 
 		</div>
 	</footer>

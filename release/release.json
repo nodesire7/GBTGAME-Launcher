@@ -1,21 +1,28 @@
 {
   "source": "nodesire7/GBTGAME-D-Launcher-v3.0",
-  "tag": "v3.0.19",
-  "name": "v3.0.19 修复 AutoLoadHV 写反导致的重复加载 / 签名错误",
-  "body": "v3.0.19 修复 AutoLoadHV 写反导致的重复加载 / 签名错误\n\n- 修复自动加载配置反写：KRK 写 False（启动器已挂载驱动），DSE / VBS 写 True（游戏自行加载）；v3.0.17/18 的 KRK 被写成 True，游戏 reflex 二次加载会弹 Hypervisor detected，MOD + KRK 还会因未禁用 DSE 报 Windows 无法验证此文件的数字签名\n- MOD + KRK 恢复为启动器挂载驱动，AutoLoadHV=False，mod 启动器直接使用已加载的 hypervisor，不再自行加载未签名驱动\n- 手动 / MOD 选择链路、首次启动确认链路后立即按链路写入正确配置；链路失败不会留下相反值\n- 切换到 MOD 时不再盲目写 True，提示选择链路：KRK=False，DSE/VBS=True\n- --mod-config 支持 --chain=0/1/2，按链路写入配置\n- 测试 110 项、断言 720 项全部通过",
-  "published": "2026-11-20T18:03:41Z",
+  "tag": "v3.0.20",
+  "name": "v3.0.20 修复 DSE 在 Windows 10 22H2 找不到 g_CiOptions",
+  "body": "v3.0.20 修复 DSE 在 Windows 10 22H2 找不到 g_CiOptions\n\n- 根因：DseFindCipInitialize 返回的是相对 CiInitialize 函数入口的偏移，旧代码却当成镜像 RVA 使用，扫描地址整体少了 CiInitialize 的 RVA（19045 上是很大的偏移），所以官方 DSE-Patcher 能找到、启动器却提示“未定位 g_CiOptions”\n- 新增 DseFindCipInitializeRva，正确叠加 CiInitialize RVA；增加单元测试（CiInitialize@0x1000 → CipInitialize@0x3256）\n- 特征序列不匹配时增加备用扫描：反向遍历 CiInitialize 前 0x100 字节的所有 call，逐个验证目标函数内的 RIP-relative store，仍然只读、不写内核\n- 修正 g_CiOptions 值校验：不再使用固定 {0,1,6} 或 raw bit0，而是与 CI 查询状态匹配（启用=非零，已 patch=0），可识别 0x0100000E 等带标志位的值\n- 扫描所有 RIP-relative store 形式（89 / C7），无效候选继续扫描而不是提前退出\n- 日志新增 CiInitialize RVA → CipInitialize RVA 诊断行\n- 111 项测试、722 断言全部通过",
+  "published": "2026-11-20T18:23:04Z",
   "commit": "main",
   "assets": [
     {
-      "name": "GBTGAME.D.v3.0.19.exe",
-      "size": 1619456
+      "name": "GBTGAME.D.v3.0.20.exe",
+      "size": 1620992
     },
     {
       "name": "SHA256SUMS.txt",
-      "size": 616
+      "size": 704
     }
   ],
   "history": [
+    {
+      "tag": "v3.0.20",
+      "name": "v3.0.20 修复 DSE 在 Windows 10 22H2 找不到 g_CiOptions",
+      "body": "v3.0.20 修复 DSE 在 Windows 10 22H2 找不到 g_CiOptions\n\n- 根因：DseFindCipInitialize 返回的是相对 CiInitialize 函数入口的偏移，旧代码却当成镜像 RVA 使用，扫描地址整体少了 CiInitialize 的 RVA（19045 上是很大的偏移），所以官方 DSE-Patcher 能找到、启动器却提示“未定位 g_CiOptions”\n- 新增 DseFindCipInitializeRva，正确叠加 CiInitialize RVA；增加单元测试（CiInitialize@0x1000 → CipInitialize@0x3256）\n- 特征序列不匹配时增加备用扫描：反向遍历 CiInitialize 前 0x100 字节的所有 call，逐个验证目标函数内的 RIP-relative store，仍然只读、不写内核\n- 修正 g_CiOptions 值校验：不再使用固定 {0,1,6} 或 raw bit0，而是与 CI 查询状态匹配（启用=非零，已 patch=0），可识别 0x0100000E 等带标志位的值\n- 扫描所有 RIP-relative store 形式（89 / C7），无效候选继续扫描而不是提前退出\n- 日志新增 CiInitialize RVA → CipInitialize RVA 诊断行\n- 111 项测试、722 断言全部通过",
+      "published": "2026-11-20T18:23:04Z",
+      "commit": "main"
+    },
     {
       "tag": "v3.0.19",
       "name": "v3.0.19 修复 AutoLoadHV 写反导致的重复加载 / 签名错误",
