@@ -1,21 +1,28 @@
 {
   "source": "nodesire7/GBTGAME-D-Launcher-v3.0",
-  "tag": "v3.0.17",
-  "name": "v3.0.17 统一 Denuvo 服务管理 + MOD 自动加载修复",
-  "body": "v3.0.17 统一 Denuvo 服务管理 + MOD 自动加载修复\n\n- MOD 模式切换 / 选择链路时立即把 DenuvOwO.ini AutoLoadHV、reflex.ini autoload、artifact.json autoload 写成 true；此前从 KRK 切回 MOD 可能残留 false，导致 mod 启动器不加载驱动\n- 修正 INI / reflex 配置写入对 UTF-8 BOM 的处理：不再追加重复 [Config] / [config] 段；已有重复段会全部更新\n- 所有链路启动前统一清理系统里的 denuvo* 残留服务（停止 + 删除），避免旧服务指向已删除驱动导致 Cannot start Denuvo service / 系统找不到指定的文件\n- 每条链路只保留启动器自己的一个服务：按游戏加载器自动选择 denuvo_denuvowo（DenuvOwO.ini）/ denuvo_kirigiri（KIRIGIRI.dll）/ denuvo（reflex/Artifact），指向当前游戏目录的驱动\n- 自加载链路（DSE / VBS / MOD）由启动器创建服务，游戏加载器负责启动；KRK 仍由 drvloader 挂载，不额外启动服务\n- MOD + KRK 不再挂载驱动，只准备驱动文件 / 服务并写 AutoLoadHV=True，避免与 mod 启动器重复加载\n- 修复 KRK 失败后同进程回退 DSE 时复用运行目录驱动、导致游戏目录没补驱动的问题（缓存按是否自加载区分）\n- 新增 --denuvo-repair（清理残留并重建当前游戏的统一服务）与 --mod-config（写入 MOD 自动加载配置）\n- 测试 109 项、断言 716 项全部通过",
-  "published": "2026-11-20T16:52:17Z",
+  "tag": "v3.0.18",
+  "name": "v3.0.18 游戏结束即清理运行时驱动 + 恢复系统设置",
+  "body": "v3.0.18 游戏结束即清理运行时驱动 + 恢复系统设置\n\n- 游戏结束（正常退出 / 用户终止）后立即停止并删除所有 denuvo* 服务，并删除启动器复制到游戏目录的驱动文件；驱动只在游戏运行期间存在，下次启动再补齐\n- RTCore64 辅助驱动在 DSE / KRK 链路结束后删除服务与 System32\\drivers\\RTCore64.sys；文件仍被内核占用时自动安排重启后删除\n- 启动器被杀 / 崩溃时，驱动文件列表保存在 gbt_restored_drivers.txt，下次启动强制清理，不会永久留在游戏目录\n- “彻底卸载”改为“恢复系统设置”：重点是还原 KRK 回调补丁、DSE g_CiOptions、测试模式 / 签名禁用 / VBS / BCD、HVCI / Credential Guard / KVA / Hyper-V 等环境修复项，并清理运行时驱动残留\n- 恢复系统设置完成后新增 BIOS 还原提示：Secure Boot、SVM Mode / Intel VT-x、Hyper-V / VT-d / IOMMU、TPM / fTPM、Above 4G Decoding / Resizable BAR、CSM / UEFI / 启动顺序\n- Denuvo 服务统一管理：denuvo_denuvowo / denuvo_kirigiri / denuvo 全部由启动器清理并只保留当前游戏的一个服务\n- 测试 110 项、断言 720 项全部通过",
+  "published": "2026-11-20T17:01:14Z",
   "commit": "main",
   "assets": [
     {
-      "name": "GBTGAME.D.v3.0.17.exe",
-      "size": 1609216
+      "name": "GBTGAME.D.v3.0.18.exe",
+      "size": 1619456
     },
     {
       "name": "SHA256SUMS.txt",
-      "size": 440
+      "size": 528
     }
   ],
   "history": [
+    {
+      "tag": "v3.0.18",
+      "name": "v3.0.18 游戏结束即清理运行时驱动 + 恢复系统设置",
+      "body": "v3.0.18 游戏结束即清理运行时驱动 + 恢复系统设置\n\n- 游戏结束（正常退出 / 用户终止）后立即停止并删除所有 denuvo* 服务，并删除启动器复制到游戏目录的驱动文件；驱动只在游戏运行期间存在，下次启动再补齐\n- RTCore64 辅助驱动在 DSE / KRK 链路结束后删除服务与 System32\\drivers\\RTCore64.sys；文件仍被内核占用时自动安排重启后删除\n- 启动器被杀 / 崩溃时，驱动文件列表保存在 gbt_restored_drivers.txt，下次启动强制清理，不会永久留在游戏目录\n- “彻底卸载”改为“恢复系统设置”：重点是还原 KRK 回调补丁、DSE g_CiOptions、测试模式 / 签名禁用 / VBS / BCD、HVCI / Credential Guard / KVA / Hyper-V 等环境修复项，并清理运行时驱动残留\n- 恢复系统设置完成后新增 BIOS 还原提示：Secure Boot、SVM Mode / Intel VT-x、Hyper-V / VT-d / IOMMU、TPM / fTPM、Above 4G Decoding / Resizable BAR、CSM / UEFI / 启动顺序\n- Denuvo 服务统一管理：denuvo_denuvowo / denuvo_kirigiri / denuvo 全部由启动器清理并只保留当前游戏的一个服务\n- 测试 110 项、断言 720 项全部通过",
+      "published": "2026-11-20T17:01:14Z",
+      "commit": "main"
+    },
     {
       "tag": "v3.0.17",
       "name": "v3.0.17 统一 Denuvo 服务管理 + MOD 自动加载修复",
