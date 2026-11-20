@@ -1,15 +1,28 @@
 {
   "source": "nodesire7/GBTGAME-D-Launcher-v3.0",
-  "tag": "v3.0.14",
-  "name": "GBTGAME D加密虚拟化游戏启动器 v3.0.14",
-  "body": "v3.0.14 首次启动确认流程\n\n- 首次启动（还没有记忆过游戏程序时）不再直接启动游戏：先询问自动检测到的游戏程序是否正确（正确，记住该程序 / 不正确，更换程序）\n- 程序确认后不立即启动游戏，而是询问本次启动模式（自动 / 手动 / MOD）；选择手动或 MOD 时继续询问链路（KRK 内核直通 / DSE 安全回退 / VBS / F7 兜底）\n- 只有在模式与链路都确定之后才执行链路并启动游戏；MOD 模式仍然只配置环境、不启动游戏\n- 选择「更换程序」时若取消文件选择，则本次不启动任何程序\n- 手动 / MOD 模式下点击链路卡片进入时链路已经确定，此时只确认游戏程序，不重复询问模式与链路\n- 首次流程的询问发生在任何链路执行之前（不会先挂驱动再问）\n- 新增 9 项首次启动流程自动化测试（是否需要询问 / 询问顺序 / 自动模式不询问链路 / MOD 询问链路 / 更换程序 / 取消不启动 / 链路已确定 / 未找到程序 / 记忆路径失效），测试总数 95 项、断言 629 项全部通过",
-  "published": "2026-09-30T14:40:00Z",
+  "tag": "v3.0.15",
+  "name": "v3.0.15 完整 Windows 版本识别 + Denuvo 服务修复",
+  "body": "v3.0.15 完整 Windows 版本识别 + Denuvo 服务修复\n\n- 完整识别 Windows 10 / 11 的版本类型：家庭版、家庭中文版、家庭单语言版、专业版、专业教育版、专业工作站版、企业版、企业版 LTSC、IoT 企业版、教育版及 Windows Server\n- 识别 1507 / 20H2 / 21H1 / 21H2 / 22H2 / 23H2 / 24H2 / 25H2 等发行版，环境面板与启动日志显示完整名称（如 Windows 10 家庭中文版 21H2（Build 19044.5737））\n- 修正 Windows 11 注册表仍报 ProductName=Windows 10 的问题：改用 RtlGetVersion + EditionID / DisplayVersion 判定内核家族与版本\n- 修复游戏启动时报 Cannot start Denuvo service / 系统找不到指定的文件：启动前自动修复 / 重建 denuvo_kirigiri 内核服务的 ImagePath（兼容旧版 denuvo 与残留 denuvo* 服务），VBS 重启续接路径同样生效\n- 只修改服务配置，不主动加载驱动，避免与 KRK 已挂载的驱动重复加载\n- 彻底卸载时一并清理 denuvo_kirigiri / denuvo 服务\n- 新增只读诊断：--os-info（Windows 版本识别）、--denuvo-diag（Denuvo 服务状态）\n- 测试 104 项、断言 693 项全部通过（新增 Windows 版本矩阵与服务路径测试）",
+  "published": "2026-11-20T01:12:08Z",
   "commit": "main",
   "assets": [
-    { "name": "GBTGAME.D.v3.0.14.exe", "size": 1568256 },
-    { "name": "SHA256SUMS.txt", "size": 176 }
+    {
+      "name": "GBTGAME.D.v3.0.15.exe",
+      "size": 1599488
+    },
+    {
+      "name": "SHA256SUMS.txt",
+      "size": 264
+    }
   ],
   "history": [
+    {
+      "tag": "v3.0.15",
+      "name": "v3.0.15 完整 Windows 版本识别 + Denuvo 服务修复",
+      "body": "v3.0.15 完整 Windows 版本识别 + Denuvo 服务修复\n\n- 完整识别 Windows 10 / 11 的版本类型：家庭版、家庭中文版、家庭单语言版、专业版、专业教育版、专业工作站版、企业版、企业版 LTSC、IoT 企业版、教育版及 Windows Server\n- 识别 1507 / 20H2 / 21H1 / 21H2 / 22H2 / 23H2 / 24H2 / 25H2 等发行版，环境面板与启动日志显示完整名称（如 Windows 10 家庭中文版 21H2（Build 19044.5737））\n- 修正 Windows 11 注册表仍报 ProductName=Windows 10 的问题：改用 RtlGetVersion + EditionID / DisplayVersion 判定内核家族与版本\n- 修复游戏启动时报 Cannot start Denuvo service / 系统找不到指定的文件：启动前自动修复 / 重建 denuvo_kirigiri 内核服务的 ImagePath（兼容旧版 denuvo 与残留 denuvo* 服务），VBS 重启续接路径同样生效\n- 只修改服务配置，不主动加载驱动，避免与 KRK 已挂载的驱动重复加载\n- 彻底卸载时一并清理 denuvo_kirigiri / denuvo 服务\n- 新增只读诊断：--os-info（Windows 版本识别）、--denuvo-diag（Denuvo 服务状态）\n- 测试 104 项、断言 693 项全部通过（新增 Windows 版本矩阵与服务路径测试）",
+      "published": "2026-11-20T01:12:08Z",
+      "commit": "main"
+    },
     {
       "tag": "v3.0.14",
       "name": "GBTGAME D加密虚拟化游戏启动器 v3.0.14",
@@ -17,7 +30,6 @@
       "published": "2026-09-30T14:40:00Z",
       "commit": "main"
     },
-
     {
       "tag": "v3.0.13",
       "name": "GBTGAME D加密虚拟化游戏启动器 v3.0.13",
@@ -25,7 +37,6 @@
       "published": "2026-09-30T13:10:00Z",
       "commit": "main"
     },
-
     {
       "tag": "v3.0.12",
       "name": "GBTGAME D加密虚拟化游戏启动器 v3.0.12",

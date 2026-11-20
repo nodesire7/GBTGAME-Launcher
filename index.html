@@ -6,7 +6,7 @@
 
 	<meta
 		name="description"
-		content="GBTGAME D加密虚拟化游戏启动器 v3.0.14 - 全新独立架构，单 EXE + WebView2，支持 KRK、DSE、VBS/F7 多链路启动。"
+		content="GBTGAME D加密虚拟化游戏启动器 v3.0.15 - 全新独立架构，单 EXE + WebView2，支持 KRK、DSE、VBS/F7 多链路启动。"
 	>
 
 	<meta name="theme-color" content="#090b10">
@@ -17,7 +17,7 @@
 		href="https://raw.githubusercontent.com/nodesire7/Gamepic/main/img/乐赏logo.webp"
 	>
 
-	<title>GBTGAME Launcher v3.0.14 - D加密虚拟化游戏启动器</title>
+	<title>GBTGAME Launcher v3.0.15 - D加密虚拟化游戏启动器</title>
 
 	<style>
 		* {
@@ -1307,7 +1307,7 @@
 				<a href="#community">社区</a>
 			</nav>
 
-			<div class="version-chip" id="current-version-chip">v3.0.14 Latest</div>
+			<div class="version-chip" id="current-version-chip">v3.0.15 Latest</div>
 
 		</div>
 	</header>
@@ -1325,7 +1325,7 @@
 					>
 				</div>
 
-				<div class="hero-badge" id="current-version-hero">GBTGAME Launcher v3.0.14</div>
+				<div class="hero-badge" id="current-version-hero">GBTGAME Launcher v3.0.15</div>
 
 				<h1>
 					<span class="gradient-text">
@@ -1364,7 +1364,7 @@
 					<div class="preview-frame">
 						<img
 							src="https://raw.githubusercontent.com/nodesire7/Gamepic/main/img/1.webp"
-							alt="GBTGAME Launcher v3.0.14 主界面"
+							alt="GBTGAME Launcher v3.0.15 主界面"
 							class="zoom-image"
 						>
 					</div>
@@ -1422,7 +1422,7 @@
 					<div class="download-header">
 						<div>
 							<div class="section-label">Current Version</div>
-							<div class="download-version" id="current-version-download">v3.0.14</div>
+							<div class="download-version" id="current-version-download">v3.0.15</div>
 						</div>
 
 						<div class="download-latest">LATEST RELEASE</div>
@@ -1450,7 +1450,7 @@
 						<a
 							id="github-release-download"
 							class="download-item github"
-							href="https://github.com/nodesire7/GBTGAME-Launcher/releases/download/v3.0.14/GBTGAME.D.v3.0.14.exe"
+							href="https://github.com/nodesire7/GBTGAME-Launcher/releases/download/v3.0.15/GBTGAME.D.v3.0.15.exe"
 							target="_blank"
 							rel="noopener noreferrer"
 						>
@@ -1458,7 +1458,7 @@
 								<div class="download-icon">GH</div>
 								<div class="download-info">
 									<h3>GitHub Release</h3>
-									<p id="github-release-meta">自动同步最新发布 · v3.0.14</p>
+									<p id="github-release-meta">自动同步最新发布 · v3.0.15</p>
 								</div>
 							</div>
 
@@ -1489,7 +1489,7 @@
 						迅雷云盘提取码 <strong>us34</strong>，
 						百度网盘提取码 <strong>addp</strong>。
 						下载后建议确认当前版本为
-						<strong id="current-version-download-note">GBTGAME Launcher v3.0.14</strong>。
+						<strong id="current-version-download-note">GBTGAME Launcher v3.0.15</strong>。
 					</div>
 
 				</div>
@@ -1802,8 +1802,25 @@
 
 <div class="release latest">
 <div class="release-head">
-<h3>v3.0.14</h3>
+<h3>v3.0.15</h3>
 <span class="latest-badge">LATEST</span>
+<span class="release-code">main</span>
+</div>
+
+<ul>
+<li><strong>完整识别 Windows 版本类型</strong>：家庭版、家庭中文版、家庭单语言版、专业版、专业教育版、专业工作站版、企业版、企业版 LTSC、IoT 企业版、教育版及 Windows Server 全部可识别</li>
+<li>识别 1507 / 20H2 / 21H1 / 21H2 / 22H2 / 23H2 / 24H2 / 25H2 等发行版，环境面板与启动日志显示完整名称（如 <code>Windows 10 家庭中文版 21H2（Build 19044.5737）</code>）</li>
+<li>修正 Windows 11 注册表仍报 <code>ProductName=Windows 10</code> 的问题：改用 RtlGetVersion + EditionID / DisplayVersion 判定内核家族与版本</li>
+<li><strong>修复 Cannot start Denuvo service / 系统找不到指定的文件</strong>：启动前自动修复 / 重建 <code>denuvo_kirigiri</code> 内核服务的 ImagePath（兼容旧版 <code>denuvo</code> 与残留 <code>denuvo*</code> 服务），VBS 重启续接路径同样生效</li>
+<li>只修改服务配置，不主动加载驱动，避免与 KRK 已挂载的驱动重复加载；彻底卸载时一并清理 Denuvo 服务</li>
+<li>新增只读诊断：<code>--os-info</code>（Windows 版本识别）、<code>--denuvo-diag</code>（Denuvo 服务状态）</li>
+<li>测试 104 项、断言 693 项全部通过（新增 Windows 版本矩阵与服务路径测试）</li>
+</ul>
+
+</div>
+<div class="release">
+<div class="release-head">
+<h3>v3.0.14</h3>
 <span class="release-code">main</span>
 </div>
 
@@ -2310,7 +2327,7 @@
 				<span>GBTGAME Launcher</span>
 			</div>
 
-			<div id="current-version-footer">D加密虚拟化游戏启动器 · v3.0.14</div>
+			<div id="current-version-footer">D加密虚拟化游戏启动器 · v3.0.15</div>
 
 		</div>
 	</footer>
