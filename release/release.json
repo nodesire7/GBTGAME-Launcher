@@ -1,21 +1,28 @@
 {
   "source": "nodesire7/GBTGAME-D-Launcher-v3.0",
-  "tag": "v3.0.18",
-  "name": "v3.0.18 游戏结束即清理运行时驱动 + 恢复系统设置",
-  "body": "v3.0.18 游戏结束即清理运行时驱动 + 恢复系统设置\n\n- 游戏结束（正常退出 / 用户终止）后立即停止并删除所有 denuvo* 服务，并删除启动器复制到游戏目录的驱动文件；驱动只在游戏运行期间存在，下次启动再补齐\n- RTCore64 辅助驱动在 DSE / KRK 链路结束后删除服务与 System32\\drivers\\RTCore64.sys；文件仍被内核占用时自动安排重启后删除\n- 启动器被杀 / 崩溃时，驱动文件列表保存在 gbt_restored_drivers.txt，下次启动强制清理，不会永久留在游戏目录\n- “彻底卸载”改为“恢复系统设置”：重点是还原 KRK 回调补丁、DSE g_CiOptions、测试模式 / 签名禁用 / VBS / BCD、HVCI / Credential Guard / KVA / Hyper-V 等环境修复项，并清理运行时驱动残留\n- 恢复系统设置完成后新增 BIOS 还原提示：Secure Boot、SVM Mode / Intel VT-x、Hyper-V / VT-d / IOMMU、TPM / fTPM、Above 4G Decoding / Resizable BAR、CSM / UEFI / 启动顺序\n- Denuvo 服务统一管理：denuvo_denuvowo / denuvo_kirigiri / denuvo 全部由启动器清理并只保留当前游戏的一个服务\n- 测试 110 项、断言 720 项全部通过",
-  "published": "2026-11-20T17:01:14Z",
+  "tag": "v3.0.19",
+  "name": "v3.0.19 修复 AutoLoadHV 写反导致的重复加载 / 签名错误",
+  "body": "v3.0.19 修复 AutoLoadHV 写反导致的重复加载 / 签名错误\n\n- 修复自动加载配置反写：KRK 写 False（启动器已挂载驱动），DSE / VBS 写 True（游戏自行加载）；v3.0.17/18 的 KRK 被写成 True，游戏 reflex 二次加载会弹 Hypervisor detected，MOD + KRK 还会因未禁用 DSE 报 Windows 无法验证此文件的数字签名\n- MOD + KRK 恢复为启动器挂载驱动，AutoLoadHV=False，mod 启动器直接使用已加载的 hypervisor，不再自行加载未签名驱动\n- 手动 / MOD 选择链路、首次启动确认链路后立即按链路写入正确配置；链路失败不会留下相反值\n- 切换到 MOD 时不再盲目写 True，提示选择链路：KRK=False，DSE/VBS=True\n- --mod-config 支持 --chain=0/1/2，按链路写入配置\n- 测试 110 项、断言 720 项全部通过",
+  "published": "2026-11-20T18:03:41Z",
   "commit": "main",
   "assets": [
     {
-      "name": "GBTGAME.D.v3.0.18.exe",
+      "name": "GBTGAME.D.v3.0.19.exe",
       "size": 1619456
     },
     {
       "name": "SHA256SUMS.txt",
-      "size": 528
+      "size": 616
     }
   ],
   "history": [
+    {
+      "tag": "v3.0.19",
+      "name": "v3.0.19 修复 AutoLoadHV 写反导致的重复加载 / 签名错误",
+      "body": "v3.0.19 修复 AutoLoadHV 写反导致的重复加载 / 签名错误\n\n- 修复自动加载配置反写：KRK 写 False（启动器已挂载驱动），DSE / VBS 写 True（游戏自行加载）；v3.0.17/18 的 KRK 被写成 True，游戏 reflex 二次加载会弹 Hypervisor detected，MOD + KRK 还会因未禁用 DSE 报 Windows 无法验证此文件的数字签名\n- MOD + KRK 恢复为启动器挂载驱动，AutoLoadHV=False，mod 启动器直接使用已加载的 hypervisor，不再自行加载未签名驱动\n- 手动 / MOD 选择链路、首次启动确认链路后立即按链路写入正确配置；链路失败不会留下相反值\n- 切换到 MOD 时不再盲目写 True，提示选择链路：KRK=False，DSE/VBS=True\n- --mod-config 支持 --chain=0/1/2，按链路写入配置\n- 测试 110 项、断言 720 项全部通过",
+      "published": "2026-11-20T18:03:41Z",
+      "commit": "main"
+    },
     {
       "tag": "v3.0.18",
       "name": "v3.0.18 游戏结束即清理运行时驱动 + 恢复系统设置",
