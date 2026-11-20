@@ -1,21 +1,28 @@
 {
   "source": "nodesire7/GBTGAME-D-Launcher-v3.0",
-  "tag": "v3.0.16",
-  "name": "v3.0.16 修复 OWO/reflex 游戏 Cannot start Denuvo service",
-  "body": "v3.0.16 修复 OWO/reflex 游戏 Cannot start Denuvo service\n\n- 修复驱动发现把启动器自己的 .GBTGAME-v3-runtime 缓存误判为“游戏自带驱动”的问题；递归搜索现在会跳过运行目录\n- DSE / VBS / MOD（游戏自加载）链路：游戏目录缺少 driver_intel / driver_amd 时，启动前把内置 OWO/Artifact 驱动整套补齐到游戏根目录（只补缺失文件，不覆盖已有文件），并用补齐后的路径配置 Denuvo 服务\n- 同时准备 denuvo（reflex/OWO）与 denuvo_kirigiri（KIRIGIRI）两种服务名；KRK 链路只修复不新建\n- 驱动补齐失败（安全软件隔离 hyperkd.sys / SimpleSvm.sys 或目录不可写）时弹出明确提示，不再把游戏拉起来后只看到 Cannot start Denuvo service\n- 新增 --driver-prep 诊断（把内置驱动补齐到当前目录，不加载内核）\n- 新增单元测试：运行目录排除、缺失文件补齐不覆盖\n- 测试 106 项、断言 702 项全部通过\n- 已知问题：Windows 10 22H2 19045.6456 的 DSE g_CiOptions 定位与 KRK 驱动加载仍需单独排查；本版先保证 VBS / 游戏自加载路径可用",
-  "published": "2026-11-20T16:00:59Z",
+  "tag": "v3.0.17",
+  "name": "v3.0.17 统一 Denuvo 服务管理 + MOD 自动加载修复",
+  "body": "v3.0.17 统一 Denuvo 服务管理 + MOD 自动加载修复\n\n- MOD 模式切换 / 选择链路时立即把 DenuvOwO.ini AutoLoadHV、reflex.ini autoload、artifact.json autoload 写成 true；此前从 KRK 切回 MOD 可能残留 false，导致 mod 启动器不加载驱动\n- 修正 INI / reflex 配置写入对 UTF-8 BOM 的处理：不再追加重复 [Config] / [config] 段；已有重复段会全部更新\n- 所有链路启动前统一清理系统里的 denuvo* 残留服务（停止 + 删除），避免旧服务指向已删除驱动导致 Cannot start Denuvo service / 系统找不到指定的文件\n- 每条链路只保留启动器自己的一个服务：按游戏加载器自动选择 denuvo_denuvowo（DenuvOwO.ini）/ denuvo_kirigiri（KIRIGIRI.dll）/ denuvo（reflex/Artifact），指向当前游戏目录的驱动\n- 自加载链路（DSE / VBS / MOD）由启动器创建服务，游戏加载器负责启动；KRK 仍由 drvloader 挂载，不额外启动服务\n- MOD + KRK 不再挂载驱动，只准备驱动文件 / 服务并写 AutoLoadHV=True，避免与 mod 启动器重复加载\n- 修复 KRK 失败后同进程回退 DSE 时复用运行目录驱动、导致游戏目录没补驱动的问题（缓存按是否自加载区分）\n- 新增 --denuvo-repair（清理残留并重建当前游戏的统一服务）与 --mod-config（写入 MOD 自动加载配置）\n- 测试 109 项、断言 716 项全部通过",
+  "published": "2026-11-20T16:52:17Z",
   "commit": "main",
   "assets": [
     {
-      "name": "GBTGAME.D.v3.0.16.exe",
-      "size": 1606144
+      "name": "GBTGAME.D.v3.0.17.exe",
+      "size": 1609216
     },
     {
       "name": "SHA256SUMS.txt",
-      "size": 352
+      "size": 440
     }
   ],
   "history": [
+    {
+      "tag": "v3.0.17",
+      "name": "v3.0.17 统一 Denuvo 服务管理 + MOD 自动加载修复",
+      "body": "v3.0.17 统一 Denuvo 服务管理 + MOD 自动加载修复\n\n- MOD 模式切换 / 选择链路时立即把 DenuvOwO.ini AutoLoadHV、reflex.ini autoload、artifact.json autoload 写成 true；此前从 KRK 切回 MOD 可能残留 false，导致 mod 启动器不加载驱动\n- 修正 INI / reflex 配置写入对 UTF-8 BOM 的处理：不再追加重复 [Config] / [config] 段；已有重复段会全部更新\n- 所有链路启动前统一清理系统里的 denuvo* 残留服务（停止 + 删除），避免旧服务指向已删除驱动导致 Cannot start Denuvo service / 系统找不到指定的文件\n- 每条链路只保留启动器自己的一个服务：按游戏加载器自动选择 denuvo_denuvowo（DenuvOwO.ini）/ denuvo_kirigiri（KIRIGIRI.dll）/ denuvo（reflex/Artifact），指向当前游戏目录的驱动\n- 自加载链路（DSE / VBS / MOD）由启动器创建服务，游戏加载器负责启动；KRK 仍由 drvloader 挂载，不额外启动服务\n- MOD + KRK 不再挂载驱动，只准备驱动文件 / 服务并写 AutoLoadHV=True，避免与 mod 启动器重复加载\n- 修复 KRK 失败后同进程回退 DSE 时复用运行目录驱动、导致游戏目录没补驱动的问题（缓存按是否自加载区分）\n- 新增 --denuvo-repair（清理残留并重建当前游戏的统一服务）与 --mod-config（写入 MOD 自动加载配置）\n- 测试 109 项、断言 716 项全部通过",
+      "published": "2026-11-20T16:52:17Z",
+      "commit": "main"
+    },
     {
       "tag": "v3.0.16",
       "name": "v3.0.16 修复 OWO/reflex 游戏 Cannot start Denuvo service",
