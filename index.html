@@ -6,7 +6,7 @@
 
 	<meta
 		name="description"
-		content="GBTGAME D加密虚拟化游戏启动器 v3.0.15 - 全新独立架构，单 EXE + WebView2，支持 KRK、DSE、VBS/F7 多链路启动。"
+		content="GBTGAME D加密虚拟化游戏启动器 v3.0.16 - 全新独立架构，单 EXE + WebView2，支持 KRK、DSE、VBS/F7 多链路启动。"
 	>
 
 	<meta name="theme-color" content="#090b10">
@@ -17,7 +17,7 @@
 		href="https://raw.githubusercontent.com/nodesire7/Gamepic/main/img/乐赏logo.webp"
 	>
 
-	<title>GBTGAME Launcher v3.0.15 - D加密虚拟化游戏启动器</title>
+	<title>GBTGAME Launcher v3.0.16 - D加密虚拟化游戏启动器</title>
 
 	<style>
 		* {
@@ -1307,7 +1307,7 @@
 				<a href="#community">社区</a>
 			</nav>
 
-			<div class="version-chip" id="current-version-chip">v3.0.15 Latest</div>
+			<div class="version-chip" id="current-version-chip">v3.0.16 Latest</div>
 
 		</div>
 	</header>
@@ -1325,7 +1325,7 @@
 					>
 				</div>
 
-				<div class="hero-badge" id="current-version-hero">GBTGAME Launcher v3.0.15</div>
+				<div class="hero-badge" id="current-version-hero">GBTGAME Launcher v3.0.16</div>
 
 				<h1>
 					<span class="gradient-text">
@@ -1364,7 +1364,7 @@
 					<div class="preview-frame">
 						<img
 							src="https://raw.githubusercontent.com/nodesire7/Gamepic/main/img/1.webp"
-							alt="GBTGAME Launcher v3.0.15 主界面"
+							alt="GBTGAME Launcher v3.0.16 主界面"
 							class="zoom-image"
 						>
 					</div>
@@ -1422,7 +1422,7 @@
 					<div class="download-header">
 						<div>
 							<div class="section-label">Current Version</div>
-							<div class="download-version" id="current-version-download">v3.0.15</div>
+							<div class="download-version" id="current-version-download">v3.0.16</div>
 						</div>
 
 						<div class="download-latest">LATEST RELEASE</div>
@@ -1450,7 +1450,7 @@
 						<a
 							id="github-release-download"
 							class="download-item github"
-							href="https://github.com/nodesire7/GBTGAME-Launcher/releases/download/v3.0.15/GBTGAME.D.v3.0.15.exe"
+							href="https://github.com/nodesire7/GBTGAME-Launcher/releases/download/v3.0.16/GBTGAME.D.v3.0.16.exe"
 							target="_blank"
 							rel="noopener noreferrer"
 						>
@@ -1458,7 +1458,7 @@
 								<div class="download-icon">GH</div>
 								<div class="download-info">
 									<h3>GitHub Release</h3>
-									<p id="github-release-meta">自动同步最新发布 · v3.0.15</p>
+									<p id="github-release-meta">自动同步最新发布 · v3.0.16</p>
 								</div>
 							</div>
 
@@ -1489,7 +1489,7 @@
 						迅雷云盘提取码 <strong>us34</strong>，
 						百度网盘提取码 <strong>addp</strong>。
 						下载后建议确认当前版本为
-						<strong id="current-version-download-note">GBTGAME Launcher v3.0.15</strong>。
+						<strong id="current-version-download-note">GBTGAME Launcher v3.0.16</strong>。
 					</div>
 
 				</div>
@@ -1802,8 +1802,25 @@
 
 <div class="release latest">
 <div class="release-head">
-<h3>v3.0.15</h3>
+<h3>v3.0.16</h3>
 <span class="latest-badge">LATEST</span>
+<span class="release-code">main</span>
+</div>
+
+<ul>
+<li><strong>修复 OWO/reflex 游戏 Cannot start Denuvo service</strong>：游戏目录缺少 <code>driver_intel</code> / <code>driver_amd</code> 时，启动前把内置驱动整套补齐到<strong>游戏根目录</strong>，不再只解压到启动器运行目录</li>
+<li>修复驱动发现把启动器自己的 <code>.GBTGAME-v3-runtime</code> 缓存误判为“游戏自带驱动”的问题；递归搜索现在会跳过运行目录</li>
+<li>自加载链路（DSE / VBS / MOD）同时准备 <code>denuvo</code>（reflex/OWO）与 <code>denuvo_kirigiri</code>（KIRIGIRI）两种服务名；KRK 链路只修复不新建</li>
+<li>驱动补齐失败（安全软件隔离 <code>hyperkd.sys</code> / <code>SimpleSvm.sys</code> 或目录不可写）时弹出明确提示，不再把游戏拉起来后只看到 Cannot start Denuvo service</li>
+<li>新增 <code>--driver-prep</code> 诊断（把内置驱动补齐到当前目录，不加载内核）</li>
+<li>新增单元测试：运行目录排除、缺失文件补齐不覆盖；测试 106 项、断言 702 项全部通过</li>
+<li>已知问题：Windows 10 22H2 19045.6456 的 DSE g_CiOptions 定位与 KRK 驱动加载仍需单独排查，本版先保证 VBS / 游戏自加载路径可用</li>
+</ul>
+
+</div>
+<div class="release">
+<div class="release-head">
+<h3>v3.0.15</h3>
 <span class="release-code">main</span>
 </div>
 
@@ -2327,7 +2344,7 @@
 				<span>GBTGAME Launcher</span>
 			</div>
 
-			<div id="current-version-footer">D加密虚拟化游戏启动器 · v3.0.15</div>
+			<div id="current-version-footer">D加密虚拟化游戏启动器 · v3.0.16</div>
 
 		</div>
 	</footer>
