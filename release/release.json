@@ -1,21 +1,28 @@
 {
   "source": "nodesire7/GBTGAME-D-Launcher-v3.0",
-  "tag": "v3.0.15",
-  "name": "v3.0.15 完整 Windows 版本识别 + Denuvo 服务修复",
-  "body": "v3.0.15 完整 Windows 版本识别 + Denuvo 服务修复\n\n- 完整识别 Windows 10 / 11 的版本类型：家庭版、家庭中文版、家庭单语言版、专业版、专业教育版、专业工作站版、企业版、企业版 LTSC、IoT 企业版、教育版及 Windows Server\n- 识别 1507 / 20H2 / 21H1 / 21H2 / 22H2 / 23H2 / 24H2 / 25H2 等发行版，环境面板与启动日志显示完整名称（如 Windows 10 家庭中文版 21H2（Build 19044.5737））\n- 修正 Windows 11 注册表仍报 ProductName=Windows 10 的问题：改用 RtlGetVersion + EditionID / DisplayVersion 判定内核家族与版本\n- 修复游戏启动时报 Cannot start Denuvo service / 系统找不到指定的文件：启动前自动修复 / 重建 denuvo_kirigiri 内核服务的 ImagePath（兼容旧版 denuvo 与残留 denuvo* 服务），VBS 重启续接路径同样生效\n- 只修改服务配置，不主动加载驱动，避免与 KRK 已挂载的驱动重复加载\n- 彻底卸载时一并清理 denuvo_kirigiri / denuvo 服务\n- 新增只读诊断：--os-info（Windows 版本识别）、--denuvo-diag（Denuvo 服务状态）\n- 测试 104 项、断言 693 项全部通过（新增 Windows 版本矩阵与服务路径测试）",
-  "published": "2026-11-20T01:12:08Z",
+  "tag": "v3.0.16",
+  "name": "v3.0.16 修复 OWO/reflex 游戏 Cannot start Denuvo service",
+  "body": "v3.0.16 修复 OWO/reflex 游戏 Cannot start Denuvo service\n\n- 修复驱动发现把启动器自己的 .GBTGAME-v3-runtime 缓存误判为“游戏自带驱动”的问题；递归搜索现在会跳过运行目录\n- DSE / VBS / MOD（游戏自加载）链路：游戏目录缺少 driver_intel / driver_amd 时，启动前把内置 OWO/Artifact 驱动整套补齐到游戏根目录（只补缺失文件，不覆盖已有文件），并用补齐后的路径配置 Denuvo 服务\n- 同时准备 denuvo（reflex/OWO）与 denuvo_kirigiri（KIRIGIRI）两种服务名；KRK 链路只修复不新建\n- 驱动补齐失败（安全软件隔离 hyperkd.sys / SimpleSvm.sys 或目录不可写）时弹出明确提示，不再把游戏拉起来后只看到 Cannot start Denuvo service\n- 新增 --driver-prep 诊断（把内置驱动补齐到当前目录，不加载内核）\n- 新增单元测试：运行目录排除、缺失文件补齐不覆盖\n- 测试 106 项、断言 702 项全部通过\n- 已知问题：Windows 10 22H2 19045.6456 的 DSE g_CiOptions 定位与 KRK 驱动加载仍需单独排查；本版先保证 VBS / 游戏自加载路径可用",
+  "published": "2026-11-20T16:00:59Z",
   "commit": "main",
   "assets": [
     {
-      "name": "GBTGAME.D.v3.0.15.exe",
-      "size": 1599488
+      "name": "GBTGAME.D.v3.0.16.exe",
+      "size": 1606144
     },
     {
       "name": "SHA256SUMS.txt",
-      "size": 264
+      "size": 352
     }
   ],
   "history": [
+    {
+      "tag": "v3.0.16",
+      "name": "v3.0.16 修复 OWO/reflex 游戏 Cannot start Denuvo service",
+      "body": "v3.0.16 修复 OWO/reflex 游戏 Cannot start Denuvo service\n\n- 修复驱动发现把启动器自己的 .GBTGAME-v3-runtime 缓存误判为“游戏自带驱动”的问题；递归搜索现在会跳过运行目录\n- DSE / VBS / MOD（游戏自加载）链路：游戏目录缺少 driver_intel / driver_amd 时，启动前把内置 OWO/Artifact 驱动整套补齐到游戏根目录（只补缺失文件，不覆盖已有文件），并用补齐后的路径配置 Denuvo 服务\n- 同时准备 denuvo（reflex/OWO）与 denuvo_kirigiri（KIRIGIRI）两种服务名；KRK 链路只修复不新建\n- 驱动补齐失败（安全软件隔离 hyperkd.sys / SimpleSvm.sys 或目录不可写）时弹出明确提示，不再把游戏拉起来后只看到 Cannot start Denuvo service\n- 新增 --driver-prep 诊断（把内置驱动补齐到当前目录，不加载内核）\n- 新增单元测试：运行目录排除、缺失文件补齐不覆盖\n- 测试 106 项、断言 702 项全部通过\n- 已知问题：Windows 10 22H2 19045.6456 的 DSE g_CiOptions 定位与 KRK 驱动加载仍需单独排查；本版先保证 VBS / 游戏自加载路径可用",
+      "published": "2026-11-20T16:00:59Z",
+      "commit": "main"
+    },
     {
       "tag": "v3.0.15",
       "name": "v3.0.15 完整 Windows 版本识别 + Denuvo 服务修复",
